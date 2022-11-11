@@ -1,0 +1,11 @@
+.access-section {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("/assets/img/background.jpg");
+  background-size: cover;
+  background-position: center;
+}
