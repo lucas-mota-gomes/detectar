@@ -1,6 +1,26 @@
 <section class="login-section">
   <div class="text-center">
-    <h1 class="fw-bold">ACESSE</h1>
-    <h1>SUA <b class="fw-bold">CONTA</b></h1>
+    <div class="mb-5">
+      <h1 class="fw-bold">ACESSE</h1>
+      <h1>SUA <b class="fw-bold">CONTA</b></h1>
+    </div>
+
+    <form action="submit" [formGroup]="loginForm">
+      <span class="text-center">Faça login</span>
+      <div class="form-group mt-3 mb-5">
+        <input type="email" class="input" formControlName="email" placeholder="E-mail" pInputText />
+      </div>
+      <div class="form-group">
+        <input type="password" class="input" formControlName="password" placeholder="Senha" [feedback]="false" pPassword />
+        <b class="text-end d-block mt-2 me-3">Não me lembro</b>
+      </div>
+      <button (click)="login()" pButton type="button" class="p-button-rounded access-button w-100 mt-5 fw-bold" label="ACESSAR"></button>
+    </form>
+
+    <div class="ask-div mt-5">
+      <span class="d-block">Não possui uma conta?</span>
+      <h1 class="d-block" routerLink="/acesso/cadastro/cliente">Cadastre-se aqui</h1>
+      <hr>
+    </div>
   </div>
 </section>

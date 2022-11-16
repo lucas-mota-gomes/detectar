@@ -1,0 +1,74 @@
+.cadastro-section {
+  & * {
+    color: #a8abae;
+  }
+  & h1 {
+    font-weight: lighter;
+  }
+}
+
+.color-grey {
+  color: rgb(108, 109, 110) !important;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  & button {
+    background-color: #969799 !important;
+    border: none !important;
+    & span {
+      color: #373438 !important;
+    }
+    height: 60px !important;
+    font-size: larger !important;
+    font-weight: bold !important;
+  }
+}
+
+.input {
+  background-color: transparent;
+  border-radius: 50px;
+  border-color: #8895af;
+  color: #a8abae;
+  width: 70vw;
+  height: 60px;
+  text-indent: 20px;
+  border-style: solid;
+}
+
+input.p-inputtext.p-component.p-element.p-inputmask:not(.inputmask) {
+  background-color: transparent;
+  border-radius: 50px;
+  border-color: #8895af;
+  color: #a8abae;
+  width: 70vw;
+  height: 60px;
+  text-indent: 20px;
+  border-style: solid;
+}
+
+.p-multiselect-panel {
+  background: #363435;
+  & * {
+    color: #969799 !important;
+  }
+  & .p-multiselect-header {
+    background: #363435;
+    & input {
+      background: #363435;
+      color: #a8abae;
+    }
+    & .p-checkbox-box {
+      background: #363435;
+      color: #a8abae;
+    }
+  }
+  &.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover, .p-highlight {
+    border-color: #6d6b6c !important;
+    background: #363435 !important;
+    color: #ffffff !important;
+  }
+}

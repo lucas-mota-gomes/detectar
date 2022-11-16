@@ -1,0 +1,68 @@
+<section class="system-section">
+  <div class="system-body">
+    <img src="assets/img/system-top.png" alt="" style="width: 100%;">
+    <router-outlet class="w-100"></router-outlet>
+  </div>
+  <footer class="mt-auto py-3">
+    <!-- Icon tab -->
+    <div class="icon-tab">
+      <div class="icon-tab-item" routerLink="/sistema/usuario" routerLinkActive="active">
+        <i class="material-icons
+        icon-tab-item-icon">person</i>
+      </div>
+      <div class="icon-tab-item">
+        <i class="material-icons
+        icon-tab-item-icon">apps</i>
+      </div>
+      <div class="icon-tab-item" routerLink="/sistema/home" routerLinkActive="active">
+        <i class="material-icons
+        icon-tab-item-icon">home</i>
+      </div>
+      <div class="icon-tab-item">
+        <i class="material-icons
+        icon-tab-item-icon">shopping_cart</i>
+      </div>
+      <div class="icon-tab-item" (click)="display = true">
+        <i class="material-icons
+        icon-tab-item-icon">menu</i>
+      </div>
+    </div>
+  </footer>
+</section>
+
+<p-sidebar [(visible)]="display" position="left" appendTo="body">
+  <div class="d-flex flex-column h-100">
+    <!-- rounded img with side text -->
+    <div class="d-flex align-items-center">
+      <img src="https://via.placeholder.com/90" alt="" class="rounded-circle me-3">
+      <div>
+        <h4>{{user.name}}</h4>
+      </div>
+    </div>
+    <!-- sub menus without border -->
+    <div style="margin-top: 40%;">
+      <div class="d-flex mb-5 fw-light align-items-center">
+        <h4>Meus dados</h4>
+      </div>
+      <div class="d-flex mb-5 fw-light align-items-center">
+        <h4>Contratar</h4>
+      </div>
+      <div class="d-flex mb-5 fw-light align-items-center">
+        <h4>Meus Pedidos</h4>
+      </div>
+      <div class="d-flex mb-5 fw-light align-items-center">
+        <h4>Pagamentos</h4>
+      </div>
+      <div class="d-flex mb-5 fw-light align-items-center">
+        <h4>Status dos Serviços</h4>
+      </div>
+      <div class="d-flex mb-5 fw-light align-items-center">
+        <h4>Relatar um problema</h4>
+      </div>
+      <div class="d-flex mb-5 fw-light align-items-center" (click)="logout()">
+        <i class="material-icons me-3">logout</i>
+        <h4 class="m-0">SAIR</h4>
+      </div>
+    </div>
+  </div>
+</p-sidebar>

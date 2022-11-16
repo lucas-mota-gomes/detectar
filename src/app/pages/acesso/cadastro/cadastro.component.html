@@ -1,0 +1,83 @@
+<section class="cadastro-section pt-4">
+  <div class="mb-5 text-center">
+    <h1 class="color-grey">{{userType === "cliente" ? "CLIENTE" : "DETETIVE"}}</h1>
+    <h1><b class="fw-bold">CADASTRE-SE</b></h1>
+  </div>
+  <form *ngIf="userType === 'cliente'; else detetive" action="submit" [formGroup]="registerFormCliente">
+    <div class="form-group">
+      <input formControlName="name" type="text" class="input mb-3" placeholder="Nome/Razão Social" pInputText />
+    </div>
+    <div class="form-group">
+      <input formControlName="cpf" type="text" class="input mb-3" placeholder="CPF/CNPJ" pInputText />
+    </div>
+    <div class="form-group">
+      <input formControlName="RG" type="text" class="input mb-3" placeholder="RG" pInputText />
+    </div>
+    <!-- Endereço input -->
+    <div class="form-group">
+      <input formControlName="address" type="text" class="input mb-3" placeholder="Endereço" pInputText />
+    </div>
+    <!-- Celular input -->
+    <div class="form-group mb-3">
+      <p-inputMask formControlName="celular" mask="(99) 9 9999-9999" type="text" class=" mb-3" placeholder="Celular" pInputMask></p-inputMask>
+    </div>
+    <!-- Email -->
+    <div class="form-group">
+      <input formControlName="email" type="email" class="input mb-3" placeholder="E-mail" pInputText />
+    </div>
+    <!-- Senha -->
+    <div class="form-group">
+      <input formControlName="password" type="password" class="input mb-3" placeholder="Senha" [feedback]="false"
+        pPassword />
+    </div>
+
+    <button [disabled]="!validateForm()" (click)="register()" pButton type="button" class="p-button-rounded access-button w-100 mt-5 fw-bold" label="CADASTRAR"></button>
+
+  </form>
+
+  <ng-template #detetive>
+    <form action="submit" [formGroup]="registerFormDetetive">
+      <div class="form-group">
+        <input formControlName="name" type="text" class="input mb-3" placeholder="Nome/Razão Social" pInputText />
+      </div>
+      <div class="form-group">
+        <input formControlName="cpf" type="text" class="input mb-3" placeholder="CPF/CNPJ" pInputText />
+      </div>
+      <div class="form-group">
+        <input formControlName="RG" type="text" class="input mb-3" placeholder="RG" pInputText />
+      </div>
+      <!-- Endereço input -->
+      <div class="form-group">
+        <input formControlName="address" type="text" class="input mb-3" placeholder="Endereço" pInputText />
+      </div>
+      <!-- Celular input -->
+      <div class="form-group mb-3">
+        <p-inputMask formControlName="celular" mask="(99) 9 9999-9999" type="text" class=" mb-3" placeholder="Celular" pInputMask></p-inputMask>
+      </div>
+      <!-- Email -->
+      <div class="form-group">
+        <input formControlName="email" type="email" class="input mb-3" placeholder="E-mail" pInputText />
+      </div>
+      <!-- Senha -->
+      <div class="form-group">
+        <input formControlName="password" type="password" class="input mb-3" placeholder="Senha" [feedback]="false"
+          pPassword />
+      </div>
+      <!-- Speciality multiselect -->
+      <div class="form-group w-100" style="height: 60px; max-width: 18rem;">
+        <p-multiSelect class="w-100 mb-3" [options]="specialities" formControlName="speciality" [style]="{'width':'100%', 'border-radius': '50px', 'padding': '4px 0', 'background':'transparent', 'border':'1px solid #8895af'}"
+          [placeholder]="'Especialidade'" [filter]="true" [filterBy]="'label'" [showToggleAll]="true"
+          [maxSelectedLabels]="1" [appendTo]="'body'">
+        </p-multiSelect>
+      </div>
+      <!-- apresentação do detetive textarea -->
+      <div class="form-group">
+        <textarea style="height: auto; min-height: 100px;" formControlName="description" class="input mb-3 mt-3" placeholder="Apresentação do detetive" pInputTextarea></textarea>
+      </div>
+
+      <button [disabled]="!validateForm()" (click)="register()" pButton type="button" class="p-button-rounded access-button w-100 my-5 fw-bold"
+        label="CADASTRAR"></button>
+
+    </form>
+  </ng-template>
+</section>
