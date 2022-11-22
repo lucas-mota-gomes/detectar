@@ -8,9 +8,11 @@
     </div>
   </div>
 
-  <div class="solicitacao-card my-4" *ngIf="dados">
+  <div class="solicitacao-card my-4 animate__animated animate__pulse" *ngIf="dados">
     <div class="d-flex">
-      <img [src]="'/assets/img/'+ dados['@expand'].speciality.img +'.png'" alt="">
+      <div class="img">
+        <img [src]="'/assets/img/'+ dados['@expand'].speciality.img +'.png'" alt="">
+      </div>
       <div class="solicitacao-card-info">
         <h5 class="fw-bold">{{dados["@expand"].speciality.label}}</h5>
         <b>Solicitação: </b>

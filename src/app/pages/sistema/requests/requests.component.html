@@ -7,21 +7,25 @@
     </div>
   </div>
 
-  <div class="solicitacao-card mb-4" *ngFor="let item of pedidos">
-    <div class="d-flex" [routerLink]="['/sistema/service-info/', item.id]">
-      <img [src]="'/assets/img/'+item['@expand'].speciality.img+'.png'" alt="">
-      <div class="solicitacao-card-info">
-        <b class="d-block">{{item["@expand"].speciality.label}}</b>
-        <div>
-          <b>Solicitação: </b>
-          <span>{{getData(item.created)}}</span>
+  <ng-container *ngFor="let item of pedidos; let odd = odd">
+    <div class="solicitacao-card mb-4 animate__animated" [class.animate__fadeInLeft]="odd" [class.animate__fadeInRight]="!odd">
+      <div class="d-flex" [routerLink]="['/sistema/service-info/', item.id]">
+        <div class="img">
+          <img [src]="'/assets/img/'+item['@expand'].speciality.img+'.png'" alt="">
         </div>
-        <div *ngIf="item['@expand'].detective">
-          <b>Detetive: </b>
-          <span>{{item['@expand'].detective.name}}</span>
+        <div class="solicitacao-card-info">
+          <b class="d-block">{{item["@expand"].speciality.label}}</b>
+          <div>
+            <b>Solicitação: </b>
+            <span>{{getData(item.created)}}</span>
+          </div>
+          <div *ngIf="item['@expand'].detective">
+            <b>Detetive: </b>
+            <span>{{item['@expand'].detective.name}}</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 
 </section>
