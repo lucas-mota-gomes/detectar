@@ -8,8 +8,8 @@
     </div>
     <div class="container mt-5">
       <div class="row justify-content-center">
-        <div class="col-4 mb-4 app-item" routerLink="/sistema/service-info/id" [class.mx-3]="item.type === 1" *ngFor="let item of specialities">
-          <img [src]="item.img" alt="img">
+        <div class="col-4 mb-4 app-item" [routerLink]="['/sistema/request-service/', item.id]" [class.mx-3]="item.type === '1'" *ngFor="let item of specialities">
+          <img [src]="'assets/img/'+item.img+'.png'" alt="img">
           <span class="d-block">{{item.label}}</span>
         </div>
       </div>

@@ -6,6 +6,8 @@ import { CadastroComponent } from './pages/acesso/cadastro/cadastro.component';
 import { LoginComponent } from './pages/acesso/login/login.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { HomeComponent } from './pages/sistema/home/home.component';
+import { RequestServiceComponent } from './pages/sistema/request-service/request-service.component';
+import { RequestsComponent } from './pages/sistema/requests/requests.component';
 import { ServiceInfoComponent } from './pages/sistema/service-info/service-info.component';
 import { UsuarioComponent } from './pages/sistema/usuario/usuario.component';
 
@@ -22,7 +24,9 @@ const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'usuario', component: UsuarioComponent },
-    { path: 'service-info/:id', component: ServiceInfoComponent }
+    { path: 'service-info/:id', component: ServiceInfoComponent },
+    { path: 'request-service/:id', component: RequestServiceComponent },
+    { path: 'requests', component: RequestsComponent }
   ] },
   { path: '', redirectTo: 'acesso', pathMatch: 'full' },
   { path: '**', redirectTo: 'acesso' },

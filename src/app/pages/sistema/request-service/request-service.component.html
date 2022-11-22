@@ -1,0 +1,41 @@
+<section class="p-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="text-center">INFORMAÇÕES</h1>
+        <h4>DO SERVIÇO</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center my-4">
+    <div class="mb-4">
+      <h5 class="fw-bold">Informe os dados do serviço abaixo:</h5>
+    </div>
+
+    <form action="submit" [formGroup]="dadosService">
+
+      <div class="form-group">
+        <input formControlName="nome" type="text" class="input mb-3" placeholder="Nome ou empresa investigada" pInputText />
+      </div>
+      <div class="form-group">
+        <input formControlName="cidade" type="text" class="input mb-3" placeholder="Cidade" pInputText />
+      </div>
+      <div class="form-group">
+        <input formControlName="estado" type="text" class="input mb-3" placeholder="Estado" pInputText />
+      </div>
+
+      <div class="form-group">
+        <textarea style="height: auto; min-height: 100px;" [style]="{'border-radius': '30px'}" formControlName="relato" class="input mb-3 mt-3" placeholder="Breve Relato" pInputTextarea></textarea>
+      </div>
+
+      <!-- file input -->
+      <div class="form-group">
+        <input type="file" multiple="true" (change)="anexar($event)">
+      </div>
+
+      <button (click)="newRequest()" pButton type="button" class="p-button-rounded access-button w-100 my-5 fw-bold"
+        label="Confirmar"></button>
+    </form>
+  </div>
+</section>

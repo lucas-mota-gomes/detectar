@@ -2,3 +2,34 @@
 body{
   margin: 0;
 }
+
+.solicitacao-card-info{
+  border-left: 1px solid #bbd2ed;
+}
+
+.solicitacao-card {
+  background-color: #e3e6e7;
+  padding: 1rem;
+  border-radius: 15px;
+  & .d-flex{
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 10px 5px 5px black;
+    box-shadow: 0px 0px 25px 6px #a1c7cd;
+  }
+  & img{
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    height: 100%;
+    width: auto;
+    align-self: center;
+    min-width: 90px;
+    max-width: 90px;
+    max-height: 90px;
+    min-height: 90px;
+  }
+  & .solicitacao-card-info{
+    text-align: left;
+    padding: 0.5rem;
+  }
+}

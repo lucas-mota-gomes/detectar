@@ -8,7 +8,32 @@
     </div>
   </div>
 
-  <div class="d-flex p-3 justify-content-between mt-3 align-items-center" style="background-color: white; border-radius: 25px">
+  <div class="solicitacao-card my-4" *ngIf="dados">
+    <div class="d-flex">
+      <img [src]="'/assets/img/'+ dados['@expand'].speciality.img +'.png'" alt="">
+      <div class="solicitacao-card-info">
+        <h5 class="fw-bold">{{dados["@expand"].speciality.label}}</h5>
+        <b>Solicitação: </b>
+        <span>{{data}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="text-center">STATUS</h1>
+        <p>
+          Seu processo ainda está no ínicio.
+          Vamos direcionar um detetive para seu caso.
+          Aguarde o contato do seu detetive.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="dados && dados.detective" class="d-flex p-3 justify-content-between mt-3 align-items-center"
+    style="background-color: white; border-radius: 25px">
     <!-- Rounded profile image -->
     <img src="https://via.placeholder.com/100" alt="" class="rounded-circle w-100 me-3">
     <div class="d-flex flex-column text-start">
@@ -18,21 +43,24 @@
         <div class="d-flex justify-content-center">
           <!-- phone circle button -->
           <div class="text-center me-3">
-            <button class="btn btn-circle-primary d-flex justify-content-center align-items-center border rounded-circle">
+            <button
+              class="btn btn-circle-primary d-flex justify-content-center align-items-center border rounded-circle">
               <i class="material-icons">phone</i>
             </button>
             <span class="d-block">Telefone</span>
           </div>
           <!-- whatsapp circle button -->
           <div class="text-center me-3">
-            <button class="btn btn-circle-primary d-flex justify-content-center align-items-center border rounded-circle m-0">
+            <button
+              class="btn btn-circle-primary d-flex justify-content-center align-items-center border rounded-circle m-0">
               <i class="material-icons">chat</i>
             </button>
             <span class="d-block">Whatsapp</span>
           </div>
           <!-- info circle button -->
           <div class="text-center me-3">
-            <button class="btn btn-circle-primary d-flex justify-content-center align-items-center border rounded-circle">
+            <button
+              class="btn btn-circle-primary d-flex justify-content-center align-items-center border rounded-circle">
               <i class="material-icons">info</i>
             </button>
             <span class="d-block">Info</span>
@@ -43,10 +71,11 @@
   </div>
 
   <div class="text-center my-4">
-    <b>Informe os dados do serviço abaixo:</b>
-
-    <form action="submit">
-
-    </form>
+    <ul class="progress-">
+      <li class="progress__item" *ngFor="let item of items" [class.progress__item--active]="item.active">
+        <p class="progress__title">{{item.label}}</p>
+        <!-- <p class="progress__info">Completed</p> -->
+      </li>
+    </ul>
   </div>
 </section>

@@ -22,10 +22,16 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { SistemaComponent } from './components/sistema/sistema.component';
-import {SidebarModule} from 'primeng/sidebar';
+import { SidebarModule } from 'primeng/sidebar';
 import { HomeComponent } from './pages/sistema/home/home.component';
 import { UsuarioComponent } from './pages/sistema/usuario/usuario.component';
 import { ServiceInfoComponent } from './pages/sistema/service-info/service-info.component';
+import { RequestServiceComponent } from './pages/sistema/request-service/request-service.component';
+import { FileUploadModule } from 'primeng/fileupload';
+import { HttpClientModule } from '@angular/common/http';
+import { RequestsComponent } from './pages/sistema/requests/requests.component';
+import { StepsModule } from 'primeng/steps';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +42,9 @@ import { ServiceInfoComponent } from './pages/sistema/service-info/service-info.
     SistemaComponent,
     HomeComponent,
     UsuarioComponent,
-    ServiceInfoComponent
+    ServiceInfoComponent,
+    RequestServiceComponent,
+    RequestsComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +61,10 @@ import { ServiceInfoComponent } from './pages/sistema/service-info/service-info.
     InputTextareaModule,
     InputMaskModule,
     ToastModule,
-    SidebarModule
+    SidebarModule,
+    FileUploadModule,
+    HttpClientModule,
+    StepsModule
   ],
   providers: [
     MessageService
