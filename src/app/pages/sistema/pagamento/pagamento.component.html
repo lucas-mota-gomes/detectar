@@ -1,0 +1,57 @@
+<section class="p-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="text-center">PAGAMENTO</h1>
+        <h4 class="fw-bold">Resumo do pedido:</h4>
+        <span class="d-block" *ngIf="request">{{request["@expand"].speciality.label}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center my-4">
+    <div class="mb-4">
+      <h5 class="fw-bold">Dados do cartão:</h5>
+    </div>
+
+    <form action="submit" [formGroup]="paymentForm">
+
+      <div class="form-group">
+        <input formControlName="cardNumber" type="text" class="input mb-3" placeholder="Número do Cartão" pInputText />
+      </div>
+      <div class="form-group">
+        <input formControlName="name" type="text" class="input mb-3" placeholder="Nome Impresso" pInputText />
+      </div>
+      <div class="form-group">
+        <input formControlName="cvv" type="text" class="input mb-3" placeholder="Código de Segurança" pInputText />
+      </div>
+
+      <div class="form-group">
+        <input formControlName="cpf" type="text" class="input mb-3" placeholder="CPF" pInputText />
+      </div>
+
+      <button (click)="confirmPayment()" pButton type="button" class="p-button-rounded access-button w-100 my-5 fw-bold"
+        label="Confirmar"></button>
+    </form>
+  </div>
+</section>
+
+<p-dialog [(visible)]="confirmModal" [closable]="false" [responsive]="true">
+  <div class="text-center">
+    <!-- confirm icon -->
+    <i class="pi pi-check-circle mb-3" style="font-size: 5rem; color: #20c25e;"></i>
+    <h3 class="d-block">Pagamento</h3>
+    <h3>Confirmado</h3>
+  </div>
+  <p-footer>
+    <div class="text-center">
+      Vamos direcionar um
+      <br>
+      detetive para o seu caso.
+
+      <button [routerLink]="['/sistema/service-info/', id]" (click)="confirmPayment()" style="color: black; background: #20c25e" pButton type="button" class="p-button-rounded access-button w-100 my-5 fw-bold"
+      label="ACOMPANHE AQUI"></button>
+
+    </div>
+  </p-footer>
+</p-dialog>

@@ -31,6 +31,9 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { HttpClientModule } from '@angular/common/http';
 import { RequestsComponent } from './pages/sistema/requests/requests.component';
 import { StepsModule } from 'primeng/steps';
+import { PagamentoComponent } from './pages/sistema/pagamento/pagamento.component';
+// dialog
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,8 @@ import { StepsModule } from 'primeng/steps';
     UsuarioComponent,
     ServiceInfoComponent,
     RequestServiceComponent,
-    RequestsComponent
+    RequestsComponent,
+    PagamentoComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +68,8 @@ import { StepsModule } from 'primeng/steps';
     SidebarModule,
     FileUploadModule,
     HttpClientModule,
-    StepsModule
+    StepsModule,
+    DialogModule
   ],
   providers: [
     MessageService

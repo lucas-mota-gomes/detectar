@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import PocketBase from 'pocketbase';
 import { environment } from 'src/environments/environment';
+import { SessionService } from './session.service';
 const client = new PocketBase(environment.pocketBaseUrl);
 
 @Injectable({
@@ -8,12 +9,13 @@ const client = new PocketBase(environment.pocketBaseUrl);
 })
 export class RequestsService {
 
-  constructor() { }
+  constructor(private sessionService: SessionService) { }
 
   async getRequests() {
     try {
       const response = await client.records.getFullList('requests', 200 ,{
-        expand: 'user,speciality,detective'
+        expand: 'user,speciality,detective',
+        filter: 'user.id = "' + this.sessionService.getUser().id + '"'
       });
       return response;
     }
@@ -36,7 +38,10 @@ export class RequestsService {
     try {
       const response = await client.records.getOne('requests', id, {
         expand: 'user,speciality,detective'
-      });
+      }) as any;
+      if(response.detective){
+        response["@expand"].detective = await client.records.getOne('profiles', response.detective);
+      }
       return response;
     }
     catch (error) {

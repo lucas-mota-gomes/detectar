@@ -55,7 +55,7 @@ export class RequestServiceComponent implements OnInit {
 
     this.requestService.newRequest(this.formData).then((response: any) => {
       this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Solicitação realizada com sucesso!' });
-      this.router.navigate(['/sistema/service-info/' + response.id]);
+      this.router.navigate(['/sistema/pagamento/' + response.id]);
     }, (error: any) => {
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao realizar solicitação!' });
     });
