@@ -30,6 +30,12 @@
         <input formControlName="cpf" type="text" class="input mb-3" placeholder="CPF" pInputText />
       </div>
 
+      <!-- expiração mask dd/aaaa -->
+      <div class="form-group">
+        <p-inputMask formControlName="expiration" mask="99/9999" type="text" class="mb-3" placeholder="Expiração" pInputMask></p-inputMask>
+      </div>
+
+
       <button (click)="confirmPayment()" pButton type="button" class="p-button-rounded access-button w-100 my-5 fw-bold"
         label="Confirmar"></button>
     </form>

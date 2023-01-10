@@ -9,7 +9,7 @@
 
   <ng-container *ngFor="let item of pedidos; let odd = odd">
     <div class="solicitacao-card mb-4 animate__animated" [class.animate__fadeInLeft]="odd" [class.animate__fadeInRight]="!odd">
-      <div class="d-flex" [routerLink]="['/sistema/service-info/', item.id]">
+      <div class="d-flex" [routerLink]="[ item.status === 0 ? '/sistema/pagamento/' : '/sistema/service-info/', item.id]">
         <div class="img">
           <img [src]="'/assets/img/'+item['@expand'].speciality.img+'.png'" alt="">
         </div>

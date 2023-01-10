@@ -37,7 +37,17 @@ form {
   height: 60px;
   text-indent: 20px;
   border-style: solid;
+  color: black !important;
+  & *{
+    color: black !important;
+  }
 }
+
+.p-inputmask{
+  color: black !important;
+}
+
+
 
 input.p-inputtext.p-component.p-element.p-inputmask:not(.inputmask) {
   background-color: transparent;

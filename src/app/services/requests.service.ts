@@ -48,4 +48,14 @@ export class RequestsService {
       throw error;
     }
   }
+
+  async updateRequest(id: any, request: any) {
+    try {
+      const response = await client.records.update('requests', id, request);
+      return response;
+    }
+    catch (error) {
+      throw error;
+    }
+  }
 }

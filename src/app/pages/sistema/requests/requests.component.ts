@@ -25,6 +25,7 @@ export class RequestsComponent implements OnInit {
   public getRequests() {
     this.requestService.getRequests().then((response: any) => {
       this.pedidos = response;
+      console.log("🚀 ~ file: requests.component.ts:28 ~ RequestsComponent ~ this.requestService.getRequests ~ response", response)
     }, (error: any) => {
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao buscar solicitações!' });
     });
