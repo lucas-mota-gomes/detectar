@@ -11,6 +11,7 @@ import { RequestsComponent } from './pages/sistema/requests/requests.component';
 import { ServiceInfoComponent } from './pages/sistema/service-info/service-info.component';
 import { UsuarioComponent } from './pages/sistema/usuario/usuario.component';
 import { PagamentoComponent } from './pages/sistema/pagamento/pagamento.component';
+import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 
 const routes: Routes = [
   {
@@ -28,7 +29,8 @@ const routes: Routes = [
     { path: 'service-info/:id', component: ServiceInfoComponent },
     { path: 'request-service/:id', component: RequestServiceComponent },
     { path: 'requests', component: RequestsComponent },
-    { path: 'pagamento/:id', component: PagamentoComponent }
+    { path: 'pagamento/:id', component: PagamentoComponent },
+    { path: 'carrinho', component: CarrinhoComponent}
   ] },
   { path: '', redirectTo: 'acesso', pathMatch: 'full' },
   { path: '**', redirectTo: 'acesso' },

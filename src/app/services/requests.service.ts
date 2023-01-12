@@ -24,6 +24,34 @@ export class RequestsService {
     }
   }
 
+  async getPaidRequests() {
+    try {
+
+      const response = await client.records.getFullList('requests', 200 ,{
+        expand: 'user,speciality,detective',
+        filter: 'user.id = "' + this.sessionService.getUser().id + '" && status > 0'
+      });
+      return response;
+    }
+    catch (error) {
+      throw error;
+    }
+  }
+
+  async getPendingRequests() {
+    try {
+
+      const response = await client.records.getFullList('requests', 200 ,{
+        expand: 'user,speciality,detective',
+        filter: 'user.id = "' + this.sessionService.getUser().id + '" && status != 1'
+      });
+      return response;
+    }
+    catch (error) {
+      throw error;
+    }
+  }
+
   async newRequest(request: any) {
     try {
       const response = await client.records.create('requests', request);

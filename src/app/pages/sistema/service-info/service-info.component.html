@@ -72,7 +72,7 @@
 
   <div class="text-center my-4">
     <ul class="progress-">
-      <li class="progress__item" *ngFor="let item of items" [class.progress__item--active]="item && item.status === dados.status">
+      <li class="progress__item" *ngFor="let item of items" [class.progress__item--active]="item && item?.status === dados?.status">
         <p class="progress__title">{{item.label}}</p>
         <!-- <p class="progress__info">Completed</p> -->
       </li>

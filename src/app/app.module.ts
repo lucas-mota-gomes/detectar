@@ -32,8 +32,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { RequestsComponent } from './pages/sistema/requests/requests.component';
 import { StepsModule } from 'primeng/steps';
 import { PagamentoComponent } from './pages/sistema/pagamento/pagamento.component';
+import {BadgeModule} from 'primeng/badge';
 // dialog
 import { DialogModule } from 'primeng/dialog';
+import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { DialogModule } from 'primeng/dialog';
     ServiceInfoComponent,
     RequestServiceComponent,
     RequestsComponent,
-    PagamentoComponent
+    PagamentoComponent,
+    CarrinhoComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +72,8 @@ import { DialogModule } from 'primeng/dialog';
     FileUploadModule,
     HttpClientModule,
     StepsModule,
-    DialogModule
+    DialogModule,
+    BadgeModule
   ],
   providers: [
     MessageService

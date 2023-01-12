@@ -38,6 +38,8 @@ export class PagamentoComponent implements OnInit {
 
   public request: any;
 
+  public window: any = window;
+
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.getRequest();
@@ -74,6 +76,7 @@ export class PagamentoComponent implements OnInit {
       this.pagseguroService.sendPaymentData(data).then((response: any) => {
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Pagamento realizado com sucesso!' });
         this.requestService.updateRequest(this.id, { status: 1 }).then((response: any) => {});
+        this.window.cart = this.window.cart - 1;
         this.confirmModal = true;
       }).catch((error: any) => {
         this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao realizar solicitação!' });

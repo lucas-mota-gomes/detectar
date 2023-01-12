@@ -18,9 +18,11 @@
         <i class="material-icons
         icon-tab-item-icon">home</i>
       </div>
-      <div class="icon-tab-item">
+      <div class="icon-tab-item position-relative" routerLink="/sistema/carrinho">
         <i class="material-icons
         icon-tab-item-icon">shopping_cart</i>
+        <p-badge class="position-absolute notification" *ngIf="pedidos" value="{{window.cart}}"
+          severity="danger"></p-badge>
       </div>
       <div class="icon-tab-item" (click)="display = true">
         <i class="material-icons
