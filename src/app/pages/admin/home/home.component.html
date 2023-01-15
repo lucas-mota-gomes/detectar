@@ -1,1 +1,46 @@
-<p>home works!</p>
+<div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
+    <div class="grid">
+        <div class="col-12 lg:col-4 p-3 position-relative" *ngFor="let item of requestList; let i = index">
+            <div class="shadow-2 surface-card p-3" style="border-radius: 12px">
+                <div class="flex align-items-center text-start justify-content-between">
+                    <div>
+                        <span class="text-3xl text-900 font-bold">{{item.expand.speciality.label}}</span>
+                        <p class="mt-1 mb-0 text-600 text-xl">{{item.expand.user.name}}</p>
+                        <p-tag [severity]="item.status == 0 ? 'danger' : 'success'"
+                            [value]="item.status == 0 ? 'Não pago' : item.status == 1 ? 'Aguardando Detetive' : 'Detetive selecionado'"></p-tag>
+                    </div>
+                </div>
+            </div>
+            <div class="position-absolute" style="top: 10px; right: 10px;">
+                <button type="button" style="background-color: transparent; border: none; color: black;" pButton
+                    icon="pi pi-ellipsis-v" (click)="toggleMenu(i, $event, item.id); window.item = item"></button>
+                <p-menu #menu [popup]="true" [model]="items"></p-menu>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-dialog header="Editar" [(visible)]="editDialog">
+
+    <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+        <div class="text-center mb-5">
+            <img src="https://via.placeholder.com/50" alt="Image" height="50" class="mb-3">
+            <div class="text-900 text-3xl font-medium mb-3">{{window.item?.nome}}</div>
+            <!-- relato with label -->
+            <div class="text-start">
+                <div class="text-600 text-xl mb-3">Relato:</div>
+                <div class="text-600 text-xl mb-3">{{window.item?.relato}}</div>
+            </div>
+        </div>
+
+        <div>
+            <label for="email1" class="block text-900 font-medium mb-2">Detetive selecionado</label>
+            <!-- prime dropdown -->
+            <p-dropdown [options]="values" [(ngModel)]="selectedValue" optionLabel="name" optionValue="id"
+                [style]="{'width':'100%'}" [showClear]="true" [placeholder]="'Selecione'">
+            </p-dropdown>
+
+            <button pButton pRipple label="Salvar" (click)="updateRequest()" icon="pi pi-check" class="w-full mt-4"></button>
+        </div>
+    </div>
+</p-dialog>

@@ -7,6 +7,7 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { AcessoComponent } from './components/acesso/acesso.component';
 import { LoginComponent } from './pages/acesso/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HomeComponent as AdminHomeComponent } from './pages/admin/home/home.component';
 
 //PrimeNG
 import { InputTextModule } from 'primeng/inputtext';
@@ -32,12 +33,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { RequestsComponent } from './pages/sistema/requests/requests.component';
 import { StepsModule } from 'primeng/steps';
 import { PagamentoComponent } from './pages/sistema/pagamento/pagamento.component';
-import {BadgeModule} from 'primeng/badge';
+import { BadgeModule } from 'primeng/badge';
 // dialog
 import { DialogModule } from 'primeng/dialog';
 import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 import { ConfigComponent } from './pages/admin/config/config.component';
-import {MenuModule} from 'primeng/menu';
+import { MenuModule } from 'primeng/menu';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import {MenuModule} from 'primeng/menu';
     RequestsComponent,
     PagamentoComponent,
     CarrinhoComponent,
-    ConfigComponent
+    ConfigComponent,
+    AdminHomeComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +80,8 @@ import {MenuModule} from 'primeng/menu';
     StepsModule,
     DialogModule,
     BadgeModule,
-    MenuModule
+    MenuModule,
+    TagModule
   ],
   providers: [
     MessageService

@@ -27,9 +27,10 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.session.login(this.loginForm.value.email, this.loginForm.value.password).then((res) => {
-      const user = res?.user as any;
+      const user = res?.record as any;
+        console.log("🚀 ~ file: login.component.ts:31 ~ LoginComponent ~ this.session.login ~ user", user)
         this.messageService.add({severity:'success', summary:'Login efetuado com sucesso!'});
-        if(user.profile['type'] == 'admin'){
+        if(user.type == 'admin'){
           this.router.navigate(['/sistema/admin/home']);
         }
         else{
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
         }
     }
     ).catch((err) => {
+      console.log("🚀 ~ file: login.component.ts:41 ~ LoginComponent ~ login ~ err", err)
       this.messageService.add({severity:'error', summary:'Erro ao efetuar login!'});
     }
     );

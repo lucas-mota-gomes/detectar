@@ -13,7 +13,7 @@ export class RequestsService {
 
   async getRequests() {
     try {
-      const response = await client.records.getFullList('requests', 200 ,{
+      const response = await client.collection('requests').getFullList(200 ,{
         expand: 'user,speciality,detective',
         filter: 'user.id = "' + this.sessionService.getUser().id + '"'
       });
@@ -24,10 +24,34 @@ export class RequestsService {
     }
   }
 
+  async getAllRequests() {
+    try {
+      const response = await client.collection('requests').getFullList(200 ,{
+        expand: 'speciality',
+        sort: '-status',
+        '$autoCancel': false 
+      });
+      let dados = response;
+      for (const iterator of dados as any) {
+        const userId = iterator.user as string;
+        const user = await client.collection('users').getOne(userId);
+        iterator['expand']['user'] = user;
+        if(iterator.detective.length > 0){
+          const detective = await client.collection('users').getOne(iterator.detective);
+          iterator['expand']['detective'] = detective;
+        }
+      }
+      return response;
+    }
+    catch (error) {
+      throw error;
+    }
+  }
+
   async getPaidRequests() {
     try {
 
-      const response = await client.records.getFullList('requests', 200 ,{
+      const response = await client.collection('requests').getFullList(200 ,{
         expand: 'user,speciality,detective',
         filter: 'user.id = "' + this.sessionService.getUser().id + '" && status > 0'
       });
@@ -41,9 +65,10 @@ export class RequestsService {
   async getPendingRequests() {
     try {
 
-      const response = await client.records.getFullList('requests', 200 ,{
+      const response = await client.collection('requests').getFullList(200 ,{
         expand: 'user,speciality,detective',
-        filter: 'user.id = "' + this.sessionService.getUser().id + '" && status != 1'
+        filter: 'user.id = "' + this.sessionService.getUser().id + '" && status = 0',
+        '$autoCancel': false 
       });
       return response;
     }
@@ -54,7 +79,7 @@ export class RequestsService {
 
   async newRequest(request: any) {
     try {
-      const response = await client.records.create('requests', request);
+      const response = await client.collection('requests').create(request);
       return response;
     }
     catch (error) {
@@ -64,11 +89,11 @@ export class RequestsService {
 
   async getRequest(id: any) {
     try {
-      const response = await client.records.getOne('requests', id, {
+      const response = await client.collection('requests').getOne(id, {
         expand: 'user,speciality,detective'
       }) as any;
       if(response.detective){
-        response["@expand"].detective = await client.records.getOne('profiles', response.detective);
+        response["expand"].detective = await client.collection('users').getOne(response.detective);
       }
       return response;
     }
@@ -79,7 +104,29 @@ export class RequestsService {
 
   async updateRequest(id: any, request: any) {
     try {
-      const response = await client.records.update('requests', id, request);
+      const response = await client.collection('requests').update(id, request);
+      return response;
+    }
+    catch (error) {
+      throw error;
+    }
+  }
+
+  async getDetectives(){
+    try {
+      const response = await client.collection('users').getFullList(200, {
+        filter: 'type = "detetive"'
+      });
+      return response;
+    }
+    catch (error) {
+      throw error;
+    }
+  }
+
+  async deleteRequest(id: any) {
+    try {
+      const response = await client.collection('requests').delete(id);
       return response;
     }
     catch (error) {

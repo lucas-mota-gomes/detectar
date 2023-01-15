@@ -42,6 +42,7 @@ export class ServiceInfoComponent implements OnInit {
       this.dados.message = this.dados.status === 1 ? 'Seu processo ainda está no ínicio. Vamos direcionar um detetive para seu caso. Aguarde o contato do seu detetive.' : this.dados.status === 2 ? 'Detetive Selecionado' : this.dados.status === 3 ? 'Investigando' : this.dados.status === 4 ? 'Retorno da solicitação' : this.dados.status === 5 ? 'Finalizado' : '';
       this.data = new Date(this.dados.created).toLocaleDateString();
     }, (error: any) => {
+      console.log("🚀 ~ file: service-info.component.ts:45 ~ ServiceInfoComponent ~ this.requestService.getRequest ~ error", error)
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao buscar solicitação!' });
     });
   }

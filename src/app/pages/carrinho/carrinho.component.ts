@@ -25,6 +25,7 @@ export class CarrinhoComponent implements OnInit {
     this.requestService.getPendingRequests().then((response: any) => {
       this.pedidos = response;
     }, (error: any) => {
+      console.log("🚀 ~ file: carrinho.component.ts:29 ~ CarrinhoComponent ~ this.requestService.getPendingRequests ~ error", error)
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao buscar solicitações!' });
     });
   }

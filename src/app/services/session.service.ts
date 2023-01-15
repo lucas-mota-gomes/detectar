@@ -18,7 +18,7 @@ export class SessionService {
 
   public async login(email: string, password: string) {
     try {
-      const response = await client.users.authViaEmail(email, password);
+      const response = await client.collection('users').authWithPassword(email, password);
       return response;
     }
     catch (error) {
@@ -27,7 +27,7 @@ export class SessionService {
   }
 
   getUser() {
-    const user = localStorage.getItem('pocketbase_auth') != null ? JSON.parse(localStorage.getItem('pocketbase_auth') as string).model.profile : undefined;
+    const user = localStorage.getItem('pocketbase_auth') != null ? JSON.parse(localStorage.getItem('pocketbase_auth') as string).model : undefined;
     if(user){
       user.avatar = user.avatar ? user.avatar : 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
       user.email = JSON.parse(localStorage.getItem('pocketbase_auth') as string).model.email;
@@ -50,17 +50,18 @@ export class SessionService {
       celular: user.celular,
       speciality: user.speciality,
       description: user.description,
-      type: user.type
+      type: user.type,
+      email: user.email,
+      password: user.password,
+      passwordConfirm: user.password
     };
 
     try {
-      const user = await client.users.create(userAuth);
+      const user = await client.collection('users').create(userProfile);
 
-      await client.users.authViaEmail(userAuth.email, userAuth.password);
+      await client.collection('users').authWithPassword(userAuth.email, userAuth.password);
 
-      const updatedProfile = await client.records.update('profiles', user?.profile?.id as string, userProfile);
-
-      return updatedProfile;
+      return user;
     }
     catch (error) {
       throw error;

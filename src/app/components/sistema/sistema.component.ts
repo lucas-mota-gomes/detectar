@@ -10,7 +10,7 @@ import { SessionService } from 'src/app/services/session.service';
 export class SistemaComponent implements OnInit {
 
   public display: boolean = false;
-  public user: any = localStorage.getItem('pocketbase_auth') != null ? JSON.parse(localStorage.getItem('pocketbase_auth') as string).model.profile : undefined;
+  public user: any = localStorage.getItem('pocketbase_auth') != null ? JSON.parse(localStorage.getItem('pocketbase_auth') as string).model : undefined;
   public pedidos: any;
   window: any = window;
 

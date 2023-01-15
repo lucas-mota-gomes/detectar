@@ -11,17 +11,17 @@
     <div class="solicitacao-card mb-4 animate__animated" [class.animate__fadeInLeft]="odd" [class.animate__fadeInRight]="!odd">
       <div class="d-flex" [routerLink]="[ item.status === 0 ? '/sistema/pagamento/' : '/sistema/service-info/', item.id]">
         <div class="img">
-          <img [src]="'/assets/img/'+item['@expand'].speciality.img+'.png'" alt="">
+          <img [src]="'/assets/img/'+item['expand'].speciality.img+'.png'" alt="">
         </div>
         <div class="solicitacao-card-info">
-          <b class="d-block">{{item["@expand"].speciality.label}}</b>
+          <b class="d-block">{{item["expand"].speciality.label}}</b>
           <div>
             <b>Solicitação: </b>
             <span>{{getData(item.created)}}</span>
           </div>
-          <div *ngIf="item['@expand'].detective">
+          <div *ngIf="item['expand'].detective">
             <b>Detetive: </b>
-            <span>{{item['@expand'].detective.name}}</span>
+            <span>{{item['expand'].detective.name}}</span>
           </div>
         </div>
       </div>

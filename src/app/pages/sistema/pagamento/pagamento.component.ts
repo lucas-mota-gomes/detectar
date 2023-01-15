@@ -68,8 +68,8 @@ export class PagamentoComponent implements OnInit {
     }
     this.pagseguroService.createCardToken(card).then((response: any) => {
       const data = {
-        value: this.request["@expand"].speciality.value.toString() + '.00',
-        desc: this.request["@expand"].speciality.label,
+        value: this.request["expand"].speciality.value.toString() + '.00',
+        desc: this.request["expand"].speciality.label,
         cardName: this.paymentForm.get('name')?.value,
         cardCPF: this.paymentForm.get('cpf')?.value
       }

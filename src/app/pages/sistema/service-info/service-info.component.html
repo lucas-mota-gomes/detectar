@@ -11,10 +11,10 @@
   <div class="solicitacao-card my-4 animate__animated animate__pulse" *ngIf="dados && !dados.detective">
     <div class="d-flex">
       <div class="img">
-        <img [src]="'/assets/img/'+ dados['@expand'].speciality.img +'.png'" alt="">
+        <img [src]="'/assets/img/'+ dados['expand'].speciality.img +'.png'" alt="">
       </div>
       <div class="solicitacao-card-info">
-        <h5 class="fw-bold">{{dados["@expand"].speciality.label}}</h5>
+        <h5 class="fw-bold">{{dados["expand"].speciality.label}}</h5>
         <b>Solicitação: </b>
         <span>{{data}}</span>
       </div>
@@ -37,8 +37,8 @@
     <!-- Rounded profile image -->
     <img src="https://via.placeholder.com/100" alt="" class="rounded-circle w-100 me-3">
     <div class="d-flex flex-column text-start">
-      <h4 class="fw-bold">{{dados["@expand"].detective.name}}</h4>
-      <span class="fw-bold">Serviço: {{dados["@expand"].speciality.label}}</span>
+      <h4 class="fw-bold">{{dados["expand"].detective.name}}</h4>
+      <span class="fw-bold">Serviço: {{dados["expand"].speciality.label}}</span>
       <div class="mt-3">
         <div class="d-flex justify-content-center">
           <!-- phone circle button -->
