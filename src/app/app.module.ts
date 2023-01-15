@@ -36,6 +36,8 @@ import {BadgeModule} from 'primeng/badge';
 // dialog
 import { DialogModule } from 'primeng/dialog';
 import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
+import { ConfigComponent } from './pages/admin/config/config.component';
+import {MenuModule} from 'primeng/menu';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
     RequestServiceComponent,
     RequestsComponent,
     PagamentoComponent,
-    CarrinhoComponent
+    CarrinhoComponent,
+    ConfigComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +76,8 @@ import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
     HttpClientModule,
     StepsModule,
     DialogModule,
-    BadgeModule
+    BadgeModule,
+    MenuModule
   ],
   providers: [
     MessageService

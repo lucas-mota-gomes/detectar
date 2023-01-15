@@ -27,8 +27,14 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.session.login(this.loginForm.value.email, this.loginForm.value.password).then((res) => {
+      const user = res?.user as any;
         this.messageService.add({severity:'success', summary:'Login efetuado com sucesso!'});
-        this.router.navigate(['/sistema/home']);
+        if(user.profile['type'] == 'admin'){
+          this.router.navigate(['/sistema/admin/home']);
+        }
+        else{
+          this.router.navigate(['/sistema/home']);
+        }
     }
     ).catch((err) => {
       this.messageService.add({severity:'error', summary:'Erro ao efetuar login!'});

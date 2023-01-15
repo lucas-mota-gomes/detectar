@@ -12,6 +12,8 @@ import { ServiceInfoComponent } from './pages/sistema/service-info/service-info.
 import { UsuarioComponent } from './pages/sistema/usuario/usuario.component';
 import { PagamentoComponent } from './pages/sistema/pagamento/pagamento.component';
 import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
+import { HomeComponent as AdminHomeComponent } from './pages/admin/home/home.component';
+import { ConfigComponent } from './pages/admin/config/config.component';
 
 const routes: Routes = [
   {
@@ -30,7 +32,10 @@ const routes: Routes = [
     { path: 'request-service/:id', component: RequestServiceComponent },
     { path: 'requests', component: RequestsComponent },
     { path: 'pagamento/:id', component: PagamentoComponent },
-    { path: 'carrinho', component: CarrinhoComponent}
+    { path: 'carrinho', component: CarrinhoComponent},
+    // admin home
+    { path: 'admin/home', component: AdminHomeComponent },
+    { path: 'admin/config', component: ConfigComponent}
   ] },
   { path: '', redirectTo: 'acesso', pathMatch: 'full' },
   { path: '**', redirectTo: 'acesso' },

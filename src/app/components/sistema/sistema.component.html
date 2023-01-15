@@ -5,7 +5,7 @@
   </div>
   <footer class="mt-auto py-3">
     <!-- Icon tab -->
-    <div class="icon-tab">
+    <div class="icon-tab" *ngIf="user.type != 'admin'">
       <div class="icon-tab-item" routerLink="/sistema/usuario" routerLinkActive="active">
         <i class="material-icons
         icon-tab-item-icon">person</i>
@@ -27,6 +27,17 @@
       <div class="icon-tab-item" (click)="display = true">
         <i class="material-icons
         icon-tab-item-icon">menu</i>
+      </div>
+    </div>
+
+    <div class="icon-tab" *ngIf="user.type == 'admin'">
+      <div class="icon-tab-item" routerLink="/sistema/usuario" routerLinkActive="active">
+        <i class="material-icons
+        icon-tab-item-icon">person</i>
+      </div>
+      <div class="icon-tab-item" routerLink="/sistema/admin/config" routerLinkActive="active">
+        <i class="material-icons
+        icon-tab-item-icon">apps</i>
       </div>
     </div>
   </footer>
