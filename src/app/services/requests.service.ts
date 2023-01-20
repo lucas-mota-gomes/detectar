@@ -29,7 +29,7 @@ export class RequestsService {
       const response = await client.collection('requests').getFullList(200 ,{
         expand: 'speciality',
         sort: '-status',
-        '$autoCancel': false 
+        '$autoCancel': false
       });
       let dados = response;
       for (const iterator of dados as any) {
@@ -50,7 +50,6 @@ export class RequestsService {
 
   async getPaidRequests() {
     try {
-
       const response = await client.collection('requests').getFullList(200 ,{
         expand: 'user,speciality,detective',
         filter: 'user.id = "' + this.sessionService.getUser().id + '" && status > 0'
@@ -62,13 +61,36 @@ export class RequestsService {
     }
   }
 
+  getDetectiveRequests() {
+    try {
+      const response = client.collection('requests').getFullList(200 ,{
+        expand: 'user,speciality,detective',
+        filter: 'detective.id = "' + this.sessionService.getUser().id + '"'
+      });
+      return response;
+    }
+    catch (error) {
+      throw error;
+    }
+  }
+
+  async getFileUrl(id: any, fileName: string) {
+    try {
+      const record = await client.collection('requests').getOne(id);
+      const response = client.getFileUrl(record, fileName);
+      return response;
+    }
+    catch (error) {
+      throw error;
+    }
+  }
+
   async getPendingRequests() {
     try {
-
       const response = await client.collection('requests').getFullList(200 ,{
         expand: 'user,speciality,detective',
         filter: 'user.id = "' + this.sessionService.getUser().id + '" && status = 0',
-        '$autoCancel': false 
+        '$autoCancel': false
       });
       return response;
     }
@@ -112,10 +134,10 @@ export class RequestsService {
     }
   }
 
-  async getDetectives(){
+  async getDetectives(speciality: any){
     try {
       const response = await client.collection('users').getFullList(200, {
-        filter: 'type = "detetive"'
+        filter: 'type = "detetive" && speciality ~ "' + speciality +'"'
       });
       return response;
     }

@@ -14,6 +14,8 @@ import { PagamentoComponent } from './pages/sistema/pagamento/pagamento.componen
 import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 import { HomeComponent as AdminHomeComponent } from './pages/admin/home/home.component';
 import { ConfigComponent } from './pages/admin/config/config.component';
+import { DetectiveRequestsComponent } from './pages/detetive/detective.requests/detective.requests.component';
+import { DetectiveRequestDetailComponent } from './pages/detetive/detective.request-detail/detective.request-detail.component';
 
 const routes: Routes = [
   {
@@ -35,7 +37,11 @@ const routes: Routes = [
     { path: 'carrinho', component: CarrinhoComponent},
     // admin home
     { path: 'admin/home', component: AdminHomeComponent },
-    { path: 'admin/config', component: ConfigComponent}
+    { path: 'admin/config', component: ConfigComponent},
+    // Detetive
+    { path: 'detetive/', redirectTo: 'detetive/requests', pathMatch: 'full' },
+    { path: 'detetive/requests', component: DetectiveRequestsComponent },
+    { path: 'detetive/requests/:id', component: DetectiveRequestDetailComponent}
   ] },
   { path: '', redirectTo: 'acesso', pathMatch: 'full' },
   { path: '**', redirectTo: 'acesso' },

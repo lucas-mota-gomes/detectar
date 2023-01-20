@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import {ActivatedRoute} from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { SessionService } from 'src/app/services/session.service';
+import { SpecialitiesService } from 'src/app/services/specialities.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -18,6 +19,7 @@ export class CadastroComponent implements OnInit {
      private router: Router,
      private route: ActivatedRoute,
      private messageService: MessageService,
+     private specialityService: SpecialitiesService,
      private readonly sessionService: SessionService) { }
 
   public registerFormCliente: FormGroup = this._fb.group({
@@ -44,24 +46,18 @@ export class CadastroComponent implements OnInit {
 
   public userType: string = 'cliente';
 
-  public specialities: any[] = [
-    {label: 'Varredura Telefônica', value: 0},
-    {label: 'Teste de Fidelidade', value: 1},
-    {label: 'Localização de Veículos', value: 2},
-    {label: 'Localização de Pessoas', value: 3},
-    {label: 'Investigação Empresarial', value: 4},
-    {label: 'Investigação de Paternidade', value: 5},
-    {label: 'Investigação de Conjugal', value: 6},
-    {label: 'Inteligência e conta-inteligência', value: 7},
-    {label: 'Cumprimento de mandado', value: 8},
-    {label: 'Investigação Criminal', value: 9},
-    {label: 'Crimes Cibernéticos', value: 10},
-    {label: 'Outros', value: 11},
-  ];
+  public specialities: any[] = [];
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: any) => {
       this.userType = params.get('userType');
+    });
+
+    this.specialityService.getSpecialities().then((res: any) => {
+      this.specialities = res;
+    }).catch((err: any) => {
+      console.log(err);
+      this.messageService.add({severity:'error', summary: 'Erro', detail: 'Erro ao buscar especialidades!'});
     });
   }
 

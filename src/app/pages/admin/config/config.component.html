@@ -1,82 +1,91 @@
 <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
-    <div class="grid">
-        <div class="col-12 lg:col-4 p-3 position-relative" *ngFor="let item of specialityList; let i = index">
-            <div class="shadow-2 surface-card p-3" style="border-radius: 12px">
-                <div class="flex align-items-center text-start justify-content-between">
-                    <div>
-                        <span class="text-3xl text-900 font-bold">{{item.value | currency:'BRL'}}</span>
-                        <p class="mt-1 mb-0 text-600 text-xl">{{item.label}}</p>
-                    </div>
-                    <div>
-                        <img src="https://via.placeholder.com/50" />
-                    </div>
-                </div>
-            </div>
-            <div class="position-absolute" style="top: 10px; right: 10px;">
-                <button type="button" style="background-color: transparent; border: none; color: black;" pButton
-                    icon="pi pi-ellipsis-v" (click)="toggleMenu(i, $event, item.id); window.item = item"></button>
-                <p-menu #menu [popup]="true" [model]="items"></p-menu>
-            </div>
+  <div class="grid">
+    <div class="col-12 lg:col-4 p-3 position-relative" *ngFor="let item of specialityList; let i = index">
+      <div class="shadow-2 surface-card p-3" style="border-radius: 12px">
+        <div class="flex align-items-center text-start justify-content-between">
+          <div>
+            <span class="text-3xl text-900 font-bold">{{item.value | currency:'BRL'}}</span>
+            <p class="mt-1 mb-0 text-600 text-xl">{{item.label}}</p>
+          </div>
+          <div>
+            <img width="50px"
+              [src]="'https://oracle.garrysmod.com.br/http://168.138.155.212:2021/api/files/specialities/'+item.id+'/'+item.image | secure | async" />
+          </div>
         </div>
-        <div class="col-12 lg:col-4 p-3 position-relative" (click)="newItemDialog()">
-            <div class="shadow-2 surface-card p-3" style="border-radius: 12px">
-                <div class="flex align-items-center text-start justify-content-between">
-                    <div>
-                        <span class="text-3xl text-900 font-bold">Nova especialidade</span>
-                    </div>
-                    <div>
-                        <i class="pi pi-plus"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
+      <div class="position-absolute" style="top: 10px; right: 10px;">
+        <button type="button" style="background-color: transparent; border: none; color: black;" pButton
+          icon="pi pi-ellipsis-v" (click)="toggleMenu(i, $event, item.id); window.item = item"></button>
+        <p-menu #menu [popup]="true" [model]="items"></p-menu>
+      </div>
     </div>
+    <div class="col-12 lg:col-4 p-3 position-relative" (click)="newItemDialog()">
+      <div class="shadow-2 surface-card p-3" style="border-radius: 12px">
+        <div class="flex align-items-center text-start justify-content-between">
+          <div>
+            <span class="text-3xl text-900 font-bold">Nova especialidade</span>
+          </div>
+          <div>
+            <i class="pi pi-plus"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
 
 <p-dialog header="Editar" [(visible)]="editDialog">
 
-    <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
-        <div class="text-center mb-5">
-            <img src="https://via.placeholder.com/50" alt="Image" height="50" class="mb-3">
-            <div class="text-900 text-3xl font-medium mb-3">{{window.item?.label}}</div>
-        </div>
-
-        <div>
-            <label for="email1" class="block text-900 font-medium mb-2">Valor</label>
-            <input id="email1" [(ngModel)]="itemValue" type="text" placeholder="{{window.item?.value}}" pInputText
-                class="w-full mb-3">
-
-            <label for="password1" class="block text-900 font-medium mb-2">Nome</label>
-            <input id="password1" [(ngModel)]="itemLabel" type="text" placeholder="{{window.item?.label}}" pInputText
-                class="w-full mb-3">
-
-            <button pButton pRipple label="Salvar" (click)="saveItem()" icon="pi pi-check" class="w-full"></button>
-        </div>
+  <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+    <div class="text-center mb-5">
+      <img *ngIf="window.item"
+        [src]="'https://oracle.garrysmod.com.br/http://168.138.155.212:2021/api/files/specialities/'+window.item?.id+'/'+window.item?.image | secure | async"
+        alt="Image" height="50" class="mb-3">
+      <div class="text-900 text-3xl font-medium mb-3">{{window.item?.label}}</div>
     </div>
+
+    <div>
+      <label for="email1" class="block text-900 font-medium mb-2">Valor</label>
+      <input id="email1" [(ngModel)]="itemValue" type="text" placeholder="{{window.item?.value}}" pInputText
+        class="w-full mb-3">
+
+      <label for="password1" class="block text-900 font-medium mb-2">Nome</label>
+      <input id="password1" [(ngModel)]="itemLabel" type="text" placeholder="{{window.item?.label}}" pInputText
+        class="w-full mb-3">
+
+      <div class="form-group mb-4">
+        <label for="anexo" class="block text-900 font-medium mb-2">Imagem</label>
+        <input type="file" multiple="false" id="anexo" (change)="anexar($event)">
+      </div>
+
+      <button pButton pRipple label="Salvar" (click)="saveItem()" icon="pi pi-check" class="w-full"></button>
+    </div>
+  </div>
 </p-dialog>
 
 <p-dialog header="Nova especialidade" [(visible)]="newDialog">
 
-    <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
-        <div class="text-center mb-5">
-            <img src="https://via.placeholder.com/50" alt="Image" height="50" class="mb-3">
-            <div class="form-group">
-                <input type="file" multiple="false" (change)="anexar($event)">
-            </div>
-            <div class="text-900 text-3xl font-medium mb-3">{{window.item?.label}}</div>
-        </div>
-
-        <div>
-            <label for="email1" class="block text-900 font-medium mb-2">Valor</label>
-            <input id="email1" [(ngModel)]="itemValue" type="text" placeholder="{{window.item?.value}}" pInputText
-                class="w-full mb-3">
-
-            <label for="password1" class="block text-900 font-medium mb-2">Nome</label>
-            <input id="password1" [(ngModel)]="itemLabel" type="text" placeholder="{{window.item?.label}}" pInputText
-                class="w-full mb-3">
-
-            <button pButton pRipple label="Salvar" (click)="newItem()" icon="pi pi-check" class="w-full"></button>
-        </div>
+  <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+    <div class="text-center mb-5">
+      <!-- <img src="https://via.placeholder.com/50" alt="Image" height="50" class="mb-3"> -->
+      <div class="form-group">
+        <label for="anexoNew" class="block text-900 font-medium mb-2">Imagem</label>
+        <input type="file" multiple="false" id="anexoNew" (change)="anexar($event)">
+      </div>
+      <div class="text-900 text-3xl font-medium mb-3">{{window.item?.label}}</div>
     </div>
+
+    <div>
+      <label for="email1" class="block text-900 font-medium mb-2">Valor</label>
+      <input id="email1" [(ngModel)]="itemValue" type="text" placeholder="{{window.item?.value}}" pInputText
+        class="w-full mb-3">
+
+      <label for="password1" class="block text-900 font-medium mb-2">Nome</label>
+      <input id="password1" [(ngModel)]="itemLabel" type="text" placeholder="{{window.item?.label}}" pInputText
+        class="w-full mb-3">
+
+      <button pButton pRipple label="Salvar" (click)="newItem()" icon="pi pi-check" class="w-full"></button>
+    </div>
+  </div>
 </p-dialog>

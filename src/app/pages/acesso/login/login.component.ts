@@ -33,6 +33,9 @@ export class LoginComponent implements OnInit {
         if(user.type == 'admin'){
           this.router.navigate(['/sistema/admin/home']);
         }
+        else if(user.type == 'detetive'){
+          this.router.navigate(['/sistema/detetive/requests']);
+        }
         else{
           this.router.navigate(['/sistema/home']);
         }

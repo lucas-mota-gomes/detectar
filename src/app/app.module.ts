@@ -40,6 +40,12 @@ import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 import { ConfigComponent } from './pages/admin/config/config.component';
 import { MenuModule } from 'primeng/menu';
 import { TagModule } from 'primeng/tag';
+import { DetectiveRequestsComponent } from './pages/detetive/detective.requests/detective.requests.component';
+import { DetectiveRequestDetailComponent } from './pages/detetive/detective.request-detail/detective.request-detail.component';
+// carousel
+import { CarouselModule } from 'primeng/carousel';
+import { AuthInterceptor } from './shared/AuthInterceptor';
+import { SecurePipe } from './pipes/secure.pipe';
 
 @NgModule({
   declarations: [
@@ -57,7 +63,10 @@ import { TagModule } from 'primeng/tag';
     PagamentoComponent,
     CarrinhoComponent,
     ConfigComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    DetectiveRequestsComponent,
+    DetectiveRequestDetailComponent,
+    SecurePipe
   ],
   imports: [
     BrowserModule,
@@ -81,10 +90,12 @@ import { TagModule } from 'primeng/tag';
     DialogModule,
     BadgeModule,
     MenuModule,
-    TagModule
+    TagModule,
+    CarouselModule
   ],
   providers: [
-    MessageService
+    MessageService,
+    AuthInterceptor
   ],
   bootstrap: [AppComponent]
 })

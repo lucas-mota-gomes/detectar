@@ -35,11 +35,7 @@ export class ConfigComponent implements OnInit {
 
   getSpecialities() {
     this.speacialityService.getSpecialities().then((res) => {
-      console.log("🚀 ~ file: config.component.ts:18 ~ ConfigComponent ~ this.speacialityService.getSpecialities ~ res", res)
       this.specialityList = res;
-      for (const iterator of this.specialityList) {
-        
-      }
     }).catch((err) => {
       console.log(err);
     });
@@ -57,7 +53,6 @@ export class ConfigComponent implements OnInit {
   }
 
   editItem(id: string){
-    console.log(id);
     this.itemValue = this.window.item?.value;
     this.itemLabel = this.window.item?.label;
     this.editDialog = true;
@@ -70,7 +65,9 @@ export class ConfigComponent implements OnInit {
   }
 
   saveItem(){
-    this.speacialityService.editSpeciality(this.window.item?.id, {value: this.itemValue, label: this.itemLabel}).then((res) => {
+    this.formData.append('value', this.itemValue.toString());
+    this.formData.append('label', this.itemLabel);
+    this.speacialityService.editSpeciality(this.window.item?.id, this.formData).then((res) => {
       // console.log("🚀 ~ file: config.component.ts:18 ~ ConfigComponent ~ this.speacialityService.getSpecialities ~ res", res)
       this.getSpecialities();
       this.messageService.add({severity:'success', summary: 'Sucesso', detail: 'Item editado com sucesso!'});
@@ -79,6 +76,7 @@ export class ConfigComponent implements OnInit {
       this.messageService.add({severity:'error', summary: 'Erro', detail: 'Erro ao editar item!'});
     });
     this.editDialog = false;
+    this.formData = new FormData();
   }
 
   newItem(){
@@ -93,6 +91,7 @@ export class ConfigComponent implements OnInit {
       this.messageService.add({severity:'error', summary: 'Erro', detail: 'Erro ao criar item!'});
     });
     this.newDialog = false;
+    this.formData = new FormData();
   }
 
   anexar(event: any) {

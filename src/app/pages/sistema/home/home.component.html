@@ -9,7 +9,7 @@
     <div class="container mt-5">
       <div class="row justify-content-between" style="gap: 1rem;">
         <div class="col-4 mb-4 app-item animate__animated animate__fadeIn" [routerLink]="['/sistema/request-service/', item.id]" *ngFor="let item of specialities">
-          <img [src]="'assets/img/'+item.img+'.png'" alt="img">
+          <img [src]="'https://oracle.garrysmod.com.br/http://168.138.155.212:2021/api/files/specialities/'+item.id+'/'+item.image | secure | async" alt="img">
           <span class="d-block">{{item.label}}</span>
         </div>
       </div>

@@ -5,7 +5,7 @@
   </div>
   <footer class="mt-auto py-3">
     <!-- Icon tab -->
-    <div class="icon-tab" *ngIf="user.type != 'admin'">
+    <div class="icon-tab" *ngIf="user.type != 'admin' && user.type != 'detetive'">
       <div class="icon-tab-item" routerLink="/sistema/usuario" routerLinkActive="active">
         <i class="material-icons
         icon-tab-item-icon">person</i>
@@ -23,6 +23,21 @@
         icon-tab-item-icon">shopping_cart</i>
         <p-badge class="position-absolute notification" *ngIf="pedidos" value="{{window.cart}}"
           severity="danger"></p-badge>
+      </div>
+      <div class="icon-tab-item" (click)="display = true">
+        <i class="material-icons
+        icon-tab-item-icon">menu</i>
+      </div>
+    </div>
+
+    <div class="icon-tab" *ngIf="user.type === 'detetive'">
+      <div class="icon-tab-item" routerLink="/sistema/usuario" routerLinkActive="active">
+        <i class="material-icons
+        icon-tab-item-icon">person</i>
+      </div>
+      <div class="icon-tab-item" routerLink="/sistema/detetive/requests" routerLinkActive="active">
+        <i class="material-icons
+        icon-tab-item-icon">home</i>
       </div>
       <div class="icon-tab-item" (click)="display = true">
         <i class="material-icons

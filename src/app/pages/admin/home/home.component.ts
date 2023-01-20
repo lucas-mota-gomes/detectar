@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
   }
 
   getDetectives(){
-    this.request.getDetectives().then((response: any) => {
+    this.request.getDetectives(this.window.item?.speciality).then((response: any) => {
       this.values = response;
     }).catch((error: any) => {
       this.messageService.add({severity:'error', summary: 'Erro', detail: 'Não foi possível carregar os detetives'});

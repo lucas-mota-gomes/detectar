@@ -1,0 +1,42 @@
+<section class="p-4">
+  <div class="container mb-4">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="text-center">MEUS PEDIDOS</h1>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngFor="let item of pedidos; let odd = odd">
+    <div class="solicitacao-card mb-4 animate__animated" [class.animate__fadeInLeft]="odd" [class.animate__fadeInRight]="!odd">
+      <div class="d-flex" [routerLink]="[ '/sistema/detetive/requests/', item.id]">
+        <div class="img">
+          <img [src]="'/assets/img/'+item['expand'].speciality.img+'.png'" alt="">
+        </div>
+        <div class="solicitacao-card-info">
+          <b class="d-block">{{item["expand"].speciality.label}}</b>
+          <div>
+            <b>Solicitação: </b>
+            <span>{{getData(item.created)}}</span>
+          </div>
+          <div *ngIf="item['expand'].detective">
+            <b>Detetive: </b>
+            <span>{{item['expand'].detective.name}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- Mensagem caso não exista solicitações -->
+  <div class="container" *ngIf="pedidos.length == 0">
+    <div class="row">
+      <div class="col-12">
+        <div class="alert alert-info text-center">
+          <h4>Não existem pedidos para você no momento!</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

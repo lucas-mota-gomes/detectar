@@ -41,7 +41,7 @@
         <input formControlName="name" type="text" class="input mb-3" placeholder="Nome/Razão Social" pInputText />
       </div>
       <div class="form-group">
-        <input formControlName="cpf" type="text" class="input mb-3" placeholder="CPF/CNPJ" pInputText />
+        <input formControlName="cpf" type="text" class="input mb-3" placeholder="CPF/CNPJ" pInputMask />
       </div>
       <div class="form-group">
         <input formControlName="RG" type="text" class="input mb-3" placeholder="RG" pInputText />
@@ -65,7 +65,7 @@
       </div>
       <!-- Speciality multiselect -->
       <div class="form-group w-100" style="height: 60px; max-width: 18rem;">
-        <p-multiSelect class="w-100 mb-3" [options]="specialities" formControlName="speciality" [style]="{'width':'100%', 'border-radius': '50px', 'padding': '4px 0', 'background':'transparent', 'border':'1px solid #8895af'}"
+        <p-multiSelect class="w-100 mb-3" [options]="specialities" formControlName="speciality" optionValue="id" [style]="{'width':'100%', 'border-radius': '50px', 'padding': '4px 0', 'background':'transparent', 'border':'1px solid #8895af'}"
           [placeholder]="'Especialidade'" [filter]="true" [filterBy]="'label'" [showToggleAll]="true"
           [maxSelectedLabels]="1" [appendTo]="'body'">
         </p-multiSelect>
