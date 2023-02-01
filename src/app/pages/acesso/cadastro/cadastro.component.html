@@ -19,7 +19,8 @@
     </div>
     <!-- Celular input -->
     <div class="form-group mb-3">
-      <p-inputMask formControlName="celular" mask="(99) 9 9999-9999" type="text" class=" mb-3" placeholder="Celular" pInputMask></p-inputMask>
+      <p-inputMask formControlName="celular" mask="(99) 9 9999-9999" type="text" class=" mb-3" placeholder="Celular"
+        pInputMask></p-inputMask>
     </div>
     <!-- Email -->
     <div class="form-group">
@@ -29,9 +30,14 @@
     <div class="form-group">
       <input formControlName="password" type="password" class="input mb-3" placeholder="Senha" [feedback]="false"
         pPassword />
+      <div class="invalid-feedback d-block"
+        *ngIf="registerFormCliente.get('password')?.value && registerFormCliente.get('password')?.value.length < 8 && registerFormCliente.get('password')?.touched">
+        Senha deve conter no mínimo 8 caracteres
+      </div>
     </div>
 
-    <button [disabled]="!validateForm()" (click)="register()" pButton type="button" class="p-button-rounded access-button w-100 mt-5 fw-bold" label="CADASTRAR"></button>
+    <button [disabled]="!validateForm()" (click)="register()" pButton type="button"
+      class="p-button-rounded access-button w-100 mt-5 fw-bold" label="CADASTRAR"></button>
 
   </form>
 
@@ -52,7 +58,8 @@
       </div>
       <!-- Celular input -->
       <div class="form-group mb-3">
-        <p-inputMask formControlName="celular" mask="(99) 9 9999-9999" type="text" class=" mb-3" placeholder="Celular" pInputMask></p-inputMask>
+        <p-inputMask formControlName="celular" mask="(99) 9 9999-9999" type="text" class=" mb-3" placeholder="Celular"
+          pInputMask></p-inputMask>
       </div>
       <!-- Email -->
       <div class="form-group">
@@ -62,21 +69,27 @@
       <div class="form-group">
         <input formControlName="password" type="password" class="input mb-3" placeholder="Senha" [feedback]="false"
           pPassword />
+        <div class="invalid-feedback d-block"
+          *ngIf="registerFormDetetive.get('password')?.value && registerFormDetetive.get('password')?.value.length < 8 && registerFormDetetive.get('password')?.touched">
+          Senha deve conter no mínimo 8 caracteres
+        </div>
       </div>
       <!-- Speciality multiselect -->
       <div class="form-group w-100" style="height: 60px; max-width: 18rem;">
-        <p-multiSelect class="w-100 mb-3" [options]="specialities" formControlName="speciality" optionValue="id" [style]="{'width':'100%', 'border-radius': '50px', 'padding': '4px 0', 'background':'transparent', 'border':'1px solid #8895af'}"
+        <p-multiSelect class="w-100 mb-3" [options]="specialities" formControlName="speciality" optionValue="id"
+          [style]="{'width':'100%', 'border-radius': '50px', 'padding': '4px 0', 'background':'transparent', 'border':'1px solid #8895af'}"
           [placeholder]="'Especialidade'" [filter]="true" [filterBy]="'label'" [showToggleAll]="true"
           [maxSelectedLabels]="1" [appendTo]="'body'">
         </p-multiSelect>
       </div>
       <!-- apresentação do detetive textarea -->
       <div class="form-group">
-        <textarea style="height: auto; min-height: 100px;" formControlName="description" class="input mb-3 mt-3" placeholder="Apresentação do detetive" pInputTextarea></textarea>
+        <textarea style="height: auto; min-height: 100px;" formControlName="description" class="input mb-3 mt-3"
+          placeholder="Apresentação do detetive" pInputTextarea></textarea>
       </div>
 
-      <button [disabled]="!validateForm()" (click)="register()" pButton type="button" class="p-button-rounded access-button w-100 my-5 fw-bold"
-        label="CADASTRAR"></button>
+      <button [disabled]="!validateForm()" (click)="register()" pButton type="button"
+        class="p-button-rounded access-button w-100 my-5 fw-bold" label="CADASTRAR"></button>
 
     </form>
   </ng-template>

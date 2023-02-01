@@ -1,2 +1,8 @@
 <router-outlet></router-outlet>
 <p-toast position="top-center"></p-toast>
+
+<div *ngIf="loading$ | async" class="loading-container">
+  <div class="loading">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+</div>

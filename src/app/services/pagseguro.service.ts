@@ -107,7 +107,7 @@ export class PagseguroService {
       .set('notificationURL', 'https://sualoja.com.br/notificacao.html')
       .set('reference', 'REF1234')
       .set('senderName', user.name)
-      .set('senderCPF', user.cpf)
+      .set('senderCPF', '60118187066')
       .set('senderAreaCode', user.celular.replace(/\D/g, '').substring(0, 2))
       .set('senderPhone', user.celular.replace(/\D/g, '').substring(2, 11))
       .set('senderEmail', user.email)
@@ -139,7 +139,7 @@ export class PagseguroService {
       .set('billingAddressState', 'SP')
       .set('billingAddressCountry', 'BRA')
 
-    return this.http.post('https://ws.sandbox.pagseguro.uol.com.br/v2/transactions', body, {
+    return this.http.post('https://oracle.garrysmod.com.br/https://ws.sandbox.pagseguro.uol.com.br/v2/transactions', body, {
       params: new HttpParams()
         .set('email', environment.pagSeguroEmail)
         .set('token', environment.pagSeguroToken),

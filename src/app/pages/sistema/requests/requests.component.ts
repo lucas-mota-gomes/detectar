@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { LoadingService } from 'src/app/services/loading.service';
 import { RequestsService } from 'src/app/services/requests.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class RequestsComponent implements OnInit {
   constructor(
     private readonly requestService: RequestsService,
     private messageService: MessageService,
-    private router: Router
+    private router: Router,
+    private loading: LoadingService
   ) { }
 
   public pedidos: any[] = [];
@@ -23,9 +25,12 @@ export class RequestsComponent implements OnInit {
   }
 
   public getRequests() {
+    this.loading.showLoading();
     this.requestService.getPaidRequests().then((response: any) => {
+      this.loading.hideLoading();
       this.pedidos = response;
     }, (error: any) => {
+      this.loading.hideLoading();
       console.log("🚀 ~ file: requests.component.ts:29 ~ RequestsComponent ~ this.requestService.getPaidRequests ~ error", error)
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao buscar solicitações!' });
     });

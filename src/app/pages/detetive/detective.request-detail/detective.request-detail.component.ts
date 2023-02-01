@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { LoadingService } from 'src/app/services/loading.service';
 import { RequestsService } from 'src/app/services/requests.service';
 import { SessionService } from 'src/app/services/session.service';
 
@@ -18,7 +19,8 @@ export class DetectiveRequestDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private messageService: MessageService,
     private readonly sessionService: SessionService,
-    private readonly requestService: RequestsService
+    private readonly requestService: RequestsService,
+    private loading: LoadingService
   ) { }
 
   ngOnInit(): void {
@@ -41,7 +43,9 @@ export class DetectiveRequestDetailComponent implements OnInit {
   ];
 
   public getRequest() {
+    this.loading.showLoading();
     this.requestService.getRequest(this.route.snapshot.paramMap.get('id')).then(async (response: any) => {
+      this.loading.hideLoading();
       this.dados = response;
       this.dados.message = this.dados.status === 1 ? 'Seu processo ainda está no ínicio. Vamos direcionar um detetive para seu caso. Aguarde o contato do seu detetive.' : this.dados.status === 2 ? 'Detetive Selecionado' : this.dados.status === 3 ? 'Investigando' : this.dados.status === 4 ? 'Retorno da solicitação' : this.dados.status === 5 ? 'Finalizado' : '';
       this.data = new Date(this.dados.created).toLocaleDateString();
@@ -50,16 +54,20 @@ export class DetectiveRequestDetailComponent implements OnInit {
       //   iterator = url;
       // }
     }, (error: any) => {
+      this.loading.hideLoading();
       console.log("🚀 ~ file: service-info.component.ts:45 ~ ServiceInfoComponent ~ this.requestService.getRequest ~ error", error)
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao buscar solicitação!' });
     });
   }
 
-  public iniciarInvestigacao(){
-    this.requestService.updateRequest(this.dados.id, {status: 3}).then((response: any) => {
+  public iniciarInvestigacao() {
+    this.loading.showLoading();
+    this.requestService.updateRequest(this.dados.id, { status: 3 }).then((response: any) => {
+      this.loading.hideLoading();
       this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Investigação iniciada!' });
       this.getRequest();
     }, (error: any) => {
+      this.loading.hideLoading();
       console.log("🚀 ~ file: service-info.component.ts:45 ~ ServiceInfoComponent ~ this.requestService.getRequest ~ error", error)
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao iniciar investigação!' });
     })
@@ -72,14 +80,17 @@ export class DetectiveRequestDetailComponent implements OnInit {
     }
   }
 
-  public iniciarRetorno(){
+  public iniciarRetorno() {
+    this.loading.showLoading();
     this.formData.append('relatoDetetive', this.relato);
     this.formData.append('status', '4');
     this.requestService.updateRequest(this.dados.id, this.formData).then((response: any) => {
+      this.loading.hideLoading();
       this.retornoDiag = false;
       this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Retorno iniciado!' });
       this.getRequest();
     }, (error: any) => {
+      this.loading.hideLoading();
       console.log("🚀 ~ file: service-info.component.ts:45 ~ ServiceInfoComponent ~ this.requestService.getRequest ~ error", error)
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao iniciar retorno!' });
     })

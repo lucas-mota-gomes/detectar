@@ -11,10 +11,12 @@
         <input type="email" class="input" formControlName="email" placeholder="E-mail" pInputText />
       </div>
       <div class="form-group">
-        <input type="password" class="input" formControlName="password" placeholder="Senha" [feedback]="false" pPassword />
-        <b class="text-end d-block mt-2 me-3">Não me lembro</b>
+        <input type="password" class="input" formControlName="password" placeholder="Senha" [feedback]="false"
+          pPassword />
+        <b (click)="resetForm = true" class="text-end d-block mt-2 me-3">Não me lembro</b>
       </div>
-      <button (click)="login()" pButton type="button" class="p-button-rounded access-button w-100 mt-5 fw-bold" label="ACESSAR"></button>
+      <button (click)="login()" pButton type="button" class="p-button-rounded access-button w-100 mt-5 fw-bold"
+        label="ACESSAR"></button>
     </form>
 
     <div class="ask-div mt-5">
@@ -24,3 +26,12 @@
     </div>
   </div>
 </section>
+
+<p-dialog header="Resetar senha" [(visible)]="resetForm" [responsive]="true">
+  <form [formGroup]="loginForm">
+    <div class="form-group mt-3 mb-5">
+      <input type="email" class="input" formControlName="email" placeholder="E-mail" pInputText />
+    </div>
+  </form>
+  <button type="button" (click)="requestPasswordReset()" pButton icon="icon" label="Confirmar"></button>
+</p-dialog>

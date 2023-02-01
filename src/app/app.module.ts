@@ -46,6 +46,8 @@ import { DetectiveRequestDetailComponent } from './pages/detetive/detective.requ
 import { CarouselModule } from 'primeng/carousel';
 import { AuthInterceptor } from './shared/AuthInterceptor';
 import { SecurePipe } from './pipes/secure.pipe';
+// progress spinner
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -91,7 +93,8 @@ import { SecurePipe } from './pipes/secure.pipe';
     BadgeModule,
     MenuModule,
     TagModule,
-    CarouselModule
+    CarouselModule,
+    ProgressSpinnerModule
   ],
   providers: [
     MessageService,

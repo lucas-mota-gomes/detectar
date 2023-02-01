@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { LoadingService } from 'src/app/services/loading.service';
 import { PagseguroService } from 'src/app/services/pagseguro.service';
 import { RequestsService } from 'src/app/services/requests.service';
 import { SessionService } from 'src/app/services/session.service';
@@ -21,7 +22,8 @@ export class PagamentoComponent implements OnInit {
     private messageService: MessageService,
     private readonly sessionService: SessionService,
     private readonly requestService: RequestsService,
-    private readonly pagseguroService: PagseguroService
+    private readonly pagseguroService: PagseguroService,
+    private loading: LoadingService
   ) { }
 
   public paymentForm: FormGroup = this._fb.group({
@@ -59,6 +61,7 @@ export class PagamentoComponent implements OnInit {
 
   confirmPayment() {
     // this.confirmModal = true;
+    this.loading.showLoading();
     const card = {
       cardNumber: this.paymentForm.get('cardNumber')?.value,
       brand: 'visa',
@@ -74,22 +77,29 @@ export class PagamentoComponent implements OnInit {
         cardCPF: this.paymentForm.get('cpf')?.value
       }
       this.pagseguroService.sendPaymentData(data).then((response: any) => {
+        this.loading.hideLoading();
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Pagamento realizado com sucesso!' });
-        this.requestService.updateRequest(this.id, { status: 1 }).then((response: any) => {});
+        this.requestService.updateRequest(this.id, { status: 1 }).then((response: any) => { });
         this.window.cart = this.window.cart - 1;
         this.confirmModal = true;
       }).catch((error: any) => {
+        this.loading.hideLoading();
         this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao realizar solicitação!' });
       });
     }, (error: any) => {
+      this.loading.hideLoading();
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao realizar solicitação!' });
     });
   }
 
   getRequest() {
+    this.loading.showLoading();
     this.requestService.getRequest(this.id).then((response: any) => {
+      this.loading.hideLoading();
       this.request = response;
     }, (error: any) => {
+      console.log("🚀 ~ file: pagamento.component.ts:101 ~ PagamentoComponent ~ this.requestService.getRequest ~ error", error)
+      this.loading.hideLoading();
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao realizar solicitação!' });
     });
   }

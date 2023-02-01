@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { LoadingService } from 'src/app/services/loading.service';
 import { RequestsService } from 'src/app/services/requests.service';
 import { SessionService } from 'src/app/services/session.service';
 
@@ -18,7 +19,8 @@ export class RequestServiceComponent implements OnInit {
     private route: ActivatedRoute,
     private messageService: MessageService,
     private readonly sessionService: SessionService,
-    private readonly requestService: RequestsService
+    private readonly requestService: RequestsService,
+    private loading: LoadingService
   ) { }
 
   public dadosService: FormGroup = this._fb.group({
@@ -45,6 +47,7 @@ export class RequestServiceComponent implements OnInit {
   }
 
   newRequest() {
+    this.loading.showLoading();
     const dados = this.dadosService.value;
     this.formData.append('nome', dados.nome);
     this.formData.append('cidade', dados.cidade);
@@ -54,9 +57,12 @@ export class RequestServiceComponent implements OnInit {
     this.formData.append('speciality', this.id);
 
     this.requestService.newRequest(this.formData).then((response: any) => {
+      this.loading.hideLoading();
       this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Solicitação realizada com sucesso!' });
       this.router.navigate(['/sistema/pagamento/' + response.id]);
     }, (error: any) => {
+      console.log("🚀 ~ file: request-service.component.ts:64 ~ RequestServiceComponent ~ this.requestService.newRequest ~ error", error)
+      this.loading.hideLoading();
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao realizar solicitação!' });
     });
   }

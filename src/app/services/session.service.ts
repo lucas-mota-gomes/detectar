@@ -77,4 +77,14 @@ export class SessionService {
       throw error;
     }
   }
+
+  public async resetPass(email: string) {
+    try {
+      const response = await client.collection('users').requestPasswordReset(email);
+      return response;
+    }
+    catch (error) {
+      throw error;
+    }
+  }
 }

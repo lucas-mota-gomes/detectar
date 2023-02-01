@@ -82,7 +82,7 @@
   <div class="d-flex gap-3">
     <button class="p-button-rounded access-button w-100 my-5 fw-bold" (click)="visible = true">Ver detalhes do serviço</button>
 
-    <button class="p-button-rounded access-button w-100 my-5 fw-bold" (click)="retornoDiag = true">Ver detalhes do retorno</button>
+    <button class="p-button-rounded access-button w-100 my-5 fw-bold" *ngIf="dados?.status == 4" (click)="retornoDiag = true">Ver detalhes do retorno</button>
   </div>
 
   <button class="p-button-rounded access-button w-100 my-3 fw-bold" *ngIf="dados?.status == 4" (click)="aprovar()">Aprovar investigação</button>
@@ -91,9 +91,9 @@
 
 <p-dialog header="Detalhes" [style]="{'max-width': '100vw'}" [(visible)]="visible" [responsive]="true">
   <h3>Axenos</h3>
-  <p-carousel [value]="dados?.anexos">
+  <p-carousel *ngIf="dados?.anexos.length > 0" [value]="dados?.anexos">
     <ng-template let-image pTemplate="item">
-      <img style="max-width: 270px;max-height: 400px;" [src]="'https://oracle.garrysmod.com.br/http://168.138.155.212:2021/api/files/requests/'+dados.id+'/'+image | secure | async" [alt]="'imagem'">
+      <img style="max-width: 270px;max-height: 400px;" [src]="'https://oracle.garrysmod.com.br/http://65.21.248.242:2021/api/files/requests/'+dados.id+'/'+image | secure | async" [alt]="'imagem'">
     </ng-template>
   </p-carousel>
   <p>Descrição da solicitação: </p>
@@ -104,7 +104,7 @@
   <h3>Axenos</h3>
   <p-carousel [value]="dados?.retorno">
     <ng-template let-image pTemplate="item">
-      <img style="max-width: 270px;max-height: 400px;" [src]="'https://oracle.garrysmod.com.br/http://168.138.155.212:2021/api/files/requests/'+dados.id+'/'+image | secure | async" [alt]="'imagem'">
+      <img style="max-width: 270px;max-height: 400px;" [src]="'https://oracle.garrysmod.com.br/http://65.21.248.242:2021/api/files/requests/'+dados.id+'/'+image | secure | async" [alt]="'imagem'">
     </ng-template>
   </p-carousel>
   <p>Descrição do retorno: </p>

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {ActivatedRoute} from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { LoadingService } from 'src/app/services/loading.service';
 import { SessionService } from 'src/app/services/session.service';
 import { SpecialitiesService } from 'src/app/services/specialities.service';
 
@@ -20,6 +21,7 @@ export class CadastroComponent implements OnInit {
      private route: ActivatedRoute,
      private messageService: MessageService,
      private specialityService: SpecialitiesService,
+     private loading: LoadingService,
      private readonly sessionService: SessionService) { }
 
   public registerFormCliente: FormGroup = this._fb.group({
@@ -29,7 +31,7 @@ export class CadastroComponent implements OnInit {
     address: [null, [Validators.required]],
     celular: [null, [Validators.required]],
     email: [null, [Validators.required, Validators.email]],
-    password: [null, [Validators.required]],
+    password: [null, [Validators.required, Validators.minLength(8)]],
   });
 
   public registerFormDetetive: FormGroup = this._fb.group({
@@ -39,7 +41,7 @@ export class CadastroComponent implements OnInit {
     address: [null, [Validators.required]],
     celular: [null, [Validators.required]],
     email: [null, [Validators.required, Validators.email]],
-    password: [null, [Validators.required]],
+    password: [null, [Validators.required, Validators.minLength(8)]],
     speciality: [null, [Validators.required]],
     description: [null, [Validators.required]]
   });
@@ -70,10 +72,12 @@ export class CadastroComponent implements OnInit {
   }
 
   public register(): void {
+    this.loading.showLoading();
     const data = this.userType === 'cliente' ? this.registerFormCliente.value : this.registerFormDetetive.value;
     if (this.userType === 'cliente') {
       data.type = 'cliente';
       this.sessionService.register(data).then((res: any) => {
+        this.loading.hideLoading();
         this.messageService.add({severity:'success', summary: 'Sucesso', detail: 'Cadastro realizado com sucesso!'});
         this.router.navigate(['/sistema/home']);
       }).catch((err: any) => {
@@ -83,10 +87,11 @@ export class CadastroComponent implements OnInit {
     else {
       data.type = 'detetive';
       this.sessionService.register(data).then((res: any) => {
+        this.loading.hideLoading();
         this.messageService.add({severity:'success', summary: 'Sucesso', detail: 'Cadastro realizado com sucesso!'});
-        this.router.navigate(['/sistema/home']);
-
+        this.router.navigate(['/sistema/detetive/requests']);
       }).catch((err: any) => {
+        this.loading.hideLoading();
         this.messageService.add({severity:'error', summary: 'Erro', detail: 'Erro ao realizar cadastro!'});
       });
     }
