@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewEncapsulation  } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { LoadingService } from 'src/app/services/loading.service';
 import { SessionService } from 'src/app/services/session.service';
@@ -15,14 +15,19 @@ import { SpecialitiesService } from 'src/app/services/specialities.service';
 })
 export class CadastroComponent implements OnInit {
 
+  public visible = false;
+  public cep = '';
+  public number = '';
+  public viaCep: any;
+
   constructor(
     private _fb: FormBuilder,
-     private router: Router,
-     private route: ActivatedRoute,
-     private messageService: MessageService,
-     private specialityService: SpecialitiesService,
-     private loading: LoadingService,
-     private readonly sessionService: SessionService) { }
+    private router: Router,
+    private route: ActivatedRoute,
+    private messageService: MessageService,
+    private specialityService: SpecialitiesService,
+    private loading: LoadingService,
+    private readonly sessionService: SessionService) { }
 
   public registerFormCliente: FormGroup = this._fb.group({
     name: [null, [Validators.required]],
@@ -59,8 +64,26 @@ export class CadastroComponent implements OnInit {
       this.specialities = res;
     }).catch((err: any) => {
       console.log(err);
-      this.messageService.add({severity:'error', summary: 'Erro', detail: 'Erro ao buscar especialidades!'});
+      this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao buscar especialidades!' });
     });
+  }
+
+  public getCep() {
+    if (this.cep.length == 8 && !Number.isNaN(Number(this.cep))) {
+      this.sessionService.getCep(this.cep).then((res: any) => {
+        this.viaCep = res;
+      }
+      ).catch((err: any) => {
+        console.log(err);
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao buscar endereço!' });
+      }
+      );
+    }
+  }
+
+  public getNumber() {
+    this.registerFormCliente.controls['address'].setValue(this.viaCep.logradouro + ', ' + this.viaCep.bairro + ', ' + this.viaCep.localidade + ', ' + this.viaCep.uf + ', ' + this.number);
+    this.registerFormDetetive.controls['address'].setValue(this.viaCep.logradouro + ', ' + this.viaCep.bairro + ', ' + this.viaCep.localidade + ', ' + this.viaCep.uf + ', ' + this.number);
   }
 
   public validateForm(): boolean {
@@ -78,21 +101,21 @@ export class CadastroComponent implements OnInit {
       data.type = 'cliente';
       this.sessionService.register(data).then((res: any) => {
         this.loading.hideLoading();
-        this.messageService.add({severity:'success', summary: 'Sucesso', detail: 'Cadastro realizado com sucesso!'});
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Cadastro realizado com sucesso!' });
         this.router.navigate(['/sistema/home']);
       }).catch((err: any) => {
-        this.messageService.add({severity:'error', summary: 'Erro', detail: 'Erro ao realizar cadastro!'});
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao realizar cadastro!' });
       });
     }
     else {
       data.type = 'detetive';
       this.sessionService.register(data).then((res: any) => {
         this.loading.hideLoading();
-        this.messageService.add({severity:'success', summary: 'Sucesso', detail: 'Cadastro realizado com sucesso!'});
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Cadastro realizado com sucesso!' });
         this.router.navigate(['/sistema/detetive/requests']);
       }).catch((err: any) => {
         this.loading.hideLoading();
-        this.messageService.add({severity:'error', summary: 'Erro', detail: 'Erro ao realizar cadastro!'});
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao realizar cadastro!' });
       });
     }
   }

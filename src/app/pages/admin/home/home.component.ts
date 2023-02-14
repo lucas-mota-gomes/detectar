@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   public menu = [] as any;
   public window = window as any;
   public editDialog = false;
+  public val = false;
   public items: MenuItem[] = [{
     label: 'Menu',
     items: [
@@ -44,7 +45,7 @@ export class HomeComponent implements OnInit {
 
   getRequests() {
     this.loading.showLoading();
-    this.request.getAllRequests().then((response: any) => {
+    this.request.getAllRequests(!this.val ? 'status = 1' : undefined).then((response: any) => {
       this.loading.hideLoading();
       this.requestList = response;
     }).catch((error: any) => {
@@ -57,6 +58,7 @@ export class HomeComponent implements OnInit {
   getDetectives(){
     this.loading.showLoading();
     this.request.getDetectives(this.window.item?.speciality).then((response: any) => {
+      this.loading.hideLoading();
       this.values = response;
     }).catch((error: any) => {
       this.loading.hideLoading();

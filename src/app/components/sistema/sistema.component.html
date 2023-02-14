@@ -76,13 +76,13 @@
       <div routerLink="/sistema/usuario" class="d-flex mb-5 fw-light align-items-center">
         <h4>Meus dados</h4>
       </div>
-      <div routerLink="/sistema/home" class="d-flex mb-5 fw-light align-items-center">
+      <div *ngIf="user.type != 'admin' && user.type != 'detetive'" routerLink="/sistema/home" class="d-flex mb-5 fw-light align-items-center">
         <h4>Contratar</h4>
       </div>
-      <div routerLink="/sistema/requests" class="d-flex mb-5 fw-light align-items-center">
+      <div *ngIf="user.type != 'admin' && user.type != 'detetive'" routerLink="/sistema/requests" class="d-flex mb-5 fw-light align-items-center">
         <h4>Meus Pedidos</h4>
       </div>
-      <div routerLink="/sistema/carrinho" class="d-flex mb-5 fw-light align-items-center">
+      <div *ngIf="user.type != 'admin' && user.type != 'detetive'" routerLink="/sistema/carrinho" class="d-flex mb-5 fw-light align-items-center">
         <h4>Pagamentos</h4>
       </div>
       <!-- <div class="d-flex mb-5 fw-light align-items-center">

@@ -35,8 +35,18 @@ export class RequestServiceComponent implements OnInit {
 
   public formData = new FormData();
 
+  public request: any = {};
+
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = this.route.snapshot.paramMap.get('id') as string;
+    this.loading.showLoading();
+    this.requestService.getSpecialty(this.id).then((response: any) => {
+      this.loading.hideLoading();
+      this.request = response;
+    }).catch((error: any) => {
+      this.loading.hideLoading();
+      console.log("🚀 ~ file: request-service.component.ts:48 ~ RequestServiceComponent ~ this.requestService.getRequest ~ error", error)
+    });
   }
 
   anexar(event: any) {

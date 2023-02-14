@@ -15,7 +15,7 @@
     </div>
     <!-- Endereço input -->
     <div class="form-group">
-      <input formControlName="address" type="text" class="input mb-3" placeholder="Endereço" pInputText />
+      <input (click)="visible = true;" formControlName="address" type="text" class="input mb-3" placeholder="Endereço" pInputText />
     </div>
     <!-- Celular input -->
     <div class="form-group mb-3">
@@ -54,7 +54,8 @@
       </div>
       <!-- Endereço input -->
       <div class="form-group">
-        <input formControlName="address" type="text" class="input mb-3" placeholder="Endereço" pInputText />
+        <input (click)="visible = true;" formControlName="address" type="text" class="input mb-3" placeholder="Endereço"
+          pInputText />
       </div>
       <!-- Celular input -->
       <div class="form-group mb-3">
@@ -94,3 +95,14 @@
     </form>
   </ng-template>
 </section>
+
+<p-dialog header="Endereço" [(visible)]="visible">
+  <p-inputMask [style]="{'width': '100%'}" (ngModelChange)="this.getCep()" mask="99999999" [(ngModel)]="cep" type="text"
+    class="mb-3" placeholder="CEP" pInputMask></p-inputMask>
+
+  <input [style]="{'width': '100%', 'margin-top': '1rem'}" [(ngModel)]="number" type="text" class="input mb-3" placeholder="Número"
+    pInputText />
+
+  <button [disabled]="!viaCep || !number" (click)="getNumber(); visible = false" pButton type="button"
+    class="p-button-rounded access-button w-100 my-5 fw-bold" label="Salvar"></button>
+</p-dialog>

@@ -4,6 +4,7 @@ import PocketBase from 'pocketbase';
 import { environment } from 'src/environments/environment';
 const client = new PocketBase(environment.pocketBaseUrl);
 import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class SessionService {
 
   user$ = this.user.asObservable();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient) { }
 
   public async login(email: string, password: string) {
     try {
@@ -72,6 +73,16 @@ export class SessionService {
     try {
       localStorage.clear();
       this.router.navigate(['/acesso/login']);
+    }
+    catch (error) {
+      throw error;
+    }
+  }
+
+  public async getCep(cep: string) {
+    try {
+      const response = this.http.get(`https://viacep.com.br/ws/${cep}/json/`).toPromise();
+      return response;
     }
     catch (error) {
       throw error;

@@ -5,6 +5,7 @@
         <h1 class="text-center">PAGAMENTO</h1>
         <h4 class="fw-bold">Resumo do pedido:</h4>
         <span class="d-block" *ngIf="request">{{request["expand"].speciality.label}}</span>
+        <span class="d-block" *ngIf="request">{{request["expand"].speciality.value | currency: 'BRL'}}</span>
       </div>
     </div>
   </div>

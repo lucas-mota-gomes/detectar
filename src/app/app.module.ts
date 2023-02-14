@@ -34,6 +34,7 @@ import { RequestsComponent } from './pages/sistema/requests/requests.component';
 import { StepsModule } from 'primeng/steps';
 import { PagamentoComponent } from './pages/sistema/pagamento/pagamento.component';
 import { BadgeModule } from 'primeng/badge';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 // dialog
 import { DialogModule } from 'primeng/dialog';
 import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
@@ -94,7 +95,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     MenuModule,
     TagModule,
     CarouselModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    ToggleButtonModule
   ],
   providers: [
     MessageService,
