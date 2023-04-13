@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { LoadingService } from 'src/app/services/loading.service';
 import { RequestsService } from 'src/app/services/requests.service';
 import { SessionService } from 'src/app/services/session.service';
+import { Clipboard } from '@capacitor/clipboard';
 
 @Component({
   selector: 'app-service-info',
@@ -54,9 +55,9 @@ export class ServiceInfoComponent implements OnInit {
     });
   }
 
-  public aprovar(){
+  public aprovar() {
     this.loading.showLoading();
-    this.requestService.updateRequest(this.dados.id, {status: 5}).then((response: any) => {
+    this.requestService.updateRequest(this.dados.id, { status: 5 }).then((response: any) => {
       this.loading.hideLoading();
       this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Investigação aprovada!' });
       this.getRequest();
@@ -65,6 +66,22 @@ export class ServiceInfoComponent implements OnInit {
       console.log("🚀 ~ file: service-info.component.ts:45 ~ ServiceInfoComponent ~ this.requestService.getRequest ~ error", error)
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao aprovar investigação!' });
     });
+  }
+
+  public async copyToClipBoard() {
+    try {
+      await Clipboard.write({
+        string: "31989796074"
+      });
+      this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Número copiado com sucesso para a área de transferência!' });
+    } catch (error) {
+      this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao copiar número!' });
+    }
+
+  }
+
+  public openWhats() {
+    window.open(`https://api.whatsapp.com/send/?phone=${'5531989796074'}`, "_blank")
   }
 
 }

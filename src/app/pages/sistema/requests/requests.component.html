@@ -18,10 +18,16 @@
           <div>
             <b>Solicitação: </b>
             <span>{{getData(item.created)}}</span>
+            <br>
           </div>
           <div *ngIf="item['expand'].detective">
             <b>Detetive: </b>
             <span>{{item['expand'].detective.name}}</span>
+          </div>
+          <div *ngIf="item.status >= 5">
+            <b>Dias restantes: </b>
+            <span>{{item.remainingDays}}</span>
+            <br>
           </div>
         </div>
       </div>

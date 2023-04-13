@@ -39,7 +39,7 @@
         <div>
             <label for="email1" class="block text-900 font-medium mb-2">Detetive selecionado</label>
             <!-- prime dropdown -->
-            <p-dropdown [options]="values" [(ngModel)]="selectedValue" optionLabel="name" optionValue="id"
+            <p-dropdown [options]="values" [(ngModel)]="selectedValue" appendTo="body" optionLabel="name" optionValue="id"
                 [style]="{'width':'100%'}" [showClear]="true" [placeholder]="'Selecione'">
             </p-dropdown>
 

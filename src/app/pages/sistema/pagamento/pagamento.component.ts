@@ -45,7 +45,6 @@ export class PagamentoComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.getRequest();
-    this.pagseguroService.getSessionId();
     this.setCardTest();
   }
 
@@ -62,31 +61,22 @@ export class PagamentoComponent implements OnInit {
   confirmPayment() {
     // this.confirmModal = true;
     this.loading.showLoading();
+    const user = this.sessionService.getUser();
     const card = {
-      cardNumber: this.paymentForm.get('cardNumber')?.value,
-      brand: 'visa',
-      cvv: this.paymentForm.get('cvv')?.value,
-      expirationMonth: this.paymentForm.get('expiration')?.value.split('/')[0],
-      expirationYear: this.paymentForm.get('expiration')?.value.split('/')[1]
+      holder: this.paymentForm.get('name')?.value,
+      number: this.paymentForm.get('cardNumber')?.value,
+      securityCode: this.paymentForm.get('cvv')?.value,
+      expMonth: this.paymentForm.get('expiration')?.value.split('/')[0],
+      expYear: this.paymentForm.get('expiration')?.value.split('/')[1]
     }
-    this.pagseguroService.createCardToken(card).then((response: any) => {
-      const data = {
-        value: this.request["expand"].speciality.value.toString() + '.00',
-        desc: this.request["expand"].speciality.label,
-        cardName: this.paymentForm.get('name')?.value,
-        cardCPF: this.paymentForm.get('cpf')?.value
-      }
-      this.pagseguroService.sendPaymentData(data).then((response: any) => {
+
+    this.pagseguroService.pay(card, user, this.request).then((response: any) => {
         this.loading.hideLoading();
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Pagamento realizado com sucesso!' });
         this.requestService.updateRequest(this.id, { status: 1 }).then((response: any) => { });
         this.window.cart = this.window.cart - 1;
         this.confirmModal = true;
-      }).catch((error: any) => {
-        this.loading.hideLoading();
-        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao realizar solicitação!' });
-      });
-    }, (error: any) => {
+    }).catch((error: any) => {
       this.loading.hideLoading();
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao realizar solicitação!' });
     });

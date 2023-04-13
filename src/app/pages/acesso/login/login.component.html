@@ -6,11 +6,13 @@
     </div>
 
     <form action="submit" [formGroup]="loginForm">
-      <span class="text-center">Faça login</span>
-      <div class="form-group mt-3 mb-5">
+      <!-- <span class="text-center">Faça login</span> -->
+      <div class="form-group flex-column gap-1 flex mt-3 mb-5">
+        <label for="email">E-MAIL</label>
         <input type="email" class="input" formControlName="email" placeholder="E-mail" pInputText />
       </div>
-      <div class="form-group">
+      <div class="form-group flex-column gap-1 flex">
+        <label for="email">SENHA</label>
         <input type="password" class="input" formControlName="password" placeholder="Senha" [feedback]="false"
           pPassword />
         <b (click)="resetForm = true" class="text-end d-block mt-2 me-3">Não me lembro</b>

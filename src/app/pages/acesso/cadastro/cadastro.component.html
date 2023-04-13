@@ -4,30 +4,37 @@
     <h1><b class="fw-bold">CADASTRE-SE</b></h1>
   </div>
   <form *ngIf="userType === 'cliente'; else detetive" action="submit" [formGroup]="registerFormCliente">
-    <div class="form-group">
+    <div class="form-group flex-column gap-1 align-items-center flex">
+      <label for="email">NOME/RAZÃO SOCIAL</label>
       <input formControlName="name" type="text" class="input mb-3" placeholder="Nome/Razão Social" pInputText />
     </div>
-    <div class="form-group">
+    <div class="form-group flex-column gap-1 align-items-center flex">
+      <label for="email">CPF/CNPJ</label>
       <input formControlName="cpf" type="text" class="input mb-3" placeholder="CPF/CNPJ" pInputText />
     </div>
-    <div class="form-group">
+    <div class="form-group flex-column gap-1 align-items-center flex">
+      <label for="email">RG</label>
       <input formControlName="RG" type="text" class="input mb-3" placeholder="RG" pInputText />
     </div>
     <!-- Endereço input -->
-    <div class="form-group">
+    <div class="form-group flex-column gap-1 align-items-center flex">
+      <label for="email">ENDEREÇO</label>
       <input (click)="visible = true;" formControlName="address" type="text" class="input mb-3" placeholder="Endereço" pInputText />
     </div>
     <!-- Celular input -->
-    <div class="form-group mb-3">
+    <div class="form-group flex-column gap-1 align-items-center flex mb-3">
+      <label for="email">CELULAR</label>
       <p-inputMask formControlName="celular" mask="(99) 9 9999-9999" type="text" class=" mb-3" placeholder="Celular"
         pInputMask></p-inputMask>
     </div>
     <!-- Email -->
-    <div class="form-group">
+    <div class="form-group flex-column gap-1 align-items-center flex">
+      <label for="email">E-MAIL</label>
       <input formControlName="email" type="email" class="input mb-3" placeholder="E-mail" pInputText />
     </div>
     <!-- Senha -->
-    <div class="form-group">
+    <div class="form-group flex-column gap-1 align-items-center flex">
+      <label for="email">SENHA</label>
       <input formControlName="password" type="password" class="input mb-3" placeholder="Senha" [feedback]="false"
         pPassword />
       <div class="invalid-feedback d-block"
@@ -43,31 +50,38 @@
 
   <ng-template #detetive>
     <form action="submit" [formGroup]="registerFormDetetive">
-      <div class="form-group">
+      <div class="form-group flex-column align-items-center gap-1 flex">
+        <label for="email">NOME/RAZÃO SOCIAL</label>
         <input formControlName="name" type="text" class="input mb-3" placeholder="Nome/Razão Social" pInputText />
       </div>
-      <div class="form-group">
+      <div class="form-group flex-column align-items-center gap-1 flex">
+        <label for="email">CPF/CNPJ</label>
         <input formControlName="cpf" type="text" class="input mb-3" placeholder="CPF/CNPJ" pInputMask />
       </div>
-      <div class="form-group">
+      <div class="form-group flex-column align-items-center gap-1 flex">
+        <label for="email">RG</label>
         <input formControlName="RG" type="text" class="input mb-3" placeholder="RG" pInputText />
       </div>
       <!-- Endereço input -->
-      <div class="form-group">
+      <div class="form-group flex-column align-items-center gap-1 flex">
+        <label for="email">ENDEREÇO</label>
         <input (click)="visible = true;" formControlName="address" type="text" class="input mb-3" placeholder="Endereço"
           pInputText />
       </div>
       <!-- Celular input -->
-      <div class="form-group mb-3">
+      <div class="form-group flex-column align-items-center gap-1 flex mb-3">
+        <label for="email">CELULAR</label>
         <p-inputMask formControlName="celular" mask="(99) 9 9999-9999" type="text" class=" mb-3" placeholder="Celular"
           pInputMask></p-inputMask>
       </div>
       <!-- Email -->
-      <div class="form-group">
+      <div class="form-group flex-column align-items-center gap-1 flex">
+        <label for="email">E-MAIL</label>
         <input formControlName="email" type="email" class="input mb-3" placeholder="E-mail" pInputText />
       </div>
       <!-- Senha -->
-      <div class="form-group">
+      <div class="form-group flex-column align-items-center gap-1 flex">
+        <label for="email">SENHA</label>
         <input formControlName="password" type="password" class="input mb-3" placeholder="Senha" [feedback]="false"
           pPassword />
         <div class="invalid-feedback d-block"
@@ -76,7 +90,8 @@
         </div>
       </div>
       <!-- Speciality multiselect -->
-      <div class="form-group w-100" style="height: 60px; max-width: 18rem;">
+      <div class="form-group flex-column align-items-center gap-1 flex w-100" style="height: 60px; max-width: 18rem;">
+        <label for="email">ESPECIALIDADE</label>
         <p-multiSelect class="w-100 mb-3" [options]="specialities" formControlName="speciality" optionValue="id"
           [style]="{'width':'100%', 'border-radius': '50px', 'padding': '4px 0', 'background':'transparent', 'border':'1px solid #8895af'}"
           [placeholder]="'Especialidade'" [filter]="true" [filterBy]="'label'" [showToggleAll]="true"
@@ -84,8 +99,9 @@
         </p-multiSelect>
       </div>
       <!-- apresentação do detetive textarea -->
-      <div class="form-group">
-        <textarea style="height: auto; min-height: 100px;" formControlName="description" class="input mb-3 mt-3"
+      <div class="form-group flex-column align-items-center gap-1 flex mt-5 pt-2">
+        <label for="email">APRESENTAÇÃO DO DETETIVE</label>
+        <textarea style="height: auto; min-height: 100px;" formControlName="description" class="input mb-3"
           placeholder="Apresentação do detetive" pInputTextarea></textarea>
       </div>
 

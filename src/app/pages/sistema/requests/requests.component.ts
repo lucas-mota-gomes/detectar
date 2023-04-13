@@ -19,6 +19,8 @@ export class RequestsComponent implements OnInit {
   ) { }
 
   public pedidos: any[] = [];
+  public today = new Date();
+  public sevenDaysAgo: string = new Date(this.today.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString(); // Data de 7 dias atrás
 
   ngOnInit(): void {
     this.getRequests();
@@ -26,9 +28,14 @@ export class RequestsComponent implements OnInit {
 
   public getRequests() {
     this.loading.showLoading();
-    this.requestService.getPaidRequests().then((response: any) => {
+    this.requestService.getPaidRequests('updated > '+`'${this.sevenDaysAgo}'`).then((response: any) => {
       this.loading.hideLoading();
       this.pedidos = response;
+      for (let item of this.pedidos) {
+        const targetDate = new Date(item.updated);
+        item.remainingDays = 7 - Math.floor((Date.now() - targetDate.getTime()) / (24 * 60 * 60 * 1000)) // Dias até completar 7 dias
+      }
+      console.log("🚀 ~ file: requests.component.ts:42 ~ RequestsComponent ~ this.pedidos.map ~  this.pedidos",  this.pedidos)
     }, (error: any) => {
       this.loading.hideLoading();
       console.log("🚀 ~ file: requests.component.ts:29 ~ RequestsComponent ~ this.requestService.getPaidRequests ~ error", error)

@@ -19,7 +19,8 @@ export class ConfigComponent implements OnInit {
   public window = window as any;
   public itemValue = 0;
   public formData = new FormData();
-  public itemLabel = '';
+  public itemLabel = ''
+  public description = '';
   public items: MenuItem[] = [{
     label: 'Menu',
     items: [
@@ -72,6 +73,7 @@ export class ConfigComponent implements OnInit {
     this.loading.showLoading();
     this.formData.append('value', this.itemValue.toString());
     this.formData.append('label', this.itemLabel);
+    this.formData.append('description', this.description);
     this.speacialityService.editSpeciality(this.window.item?.id, this.formData).then((res) => {
       this.loading.hideLoading();
       // console.log("🚀 ~ file: config.component.ts:18 ~ ConfigComponent ~ this.speacialityService.getSpecialities ~ res", res)
@@ -90,6 +92,7 @@ export class ConfigComponent implements OnInit {
     this.loading.showLoading();
     this.formData.append('value', this.itemValue.toString());
     this.formData.append('label', this.itemLabel);
+    this.formData.append('description', this.description);
     this.speacialityService.createSpeciality(this.formData).then((res) => {
       this.loading.hideLoading();
       // console.log("🚀 ~ file: config.component.ts:18 ~ ConfigComponent ~ this.speacialityService.getSpecialities ~ res", res)

@@ -27,7 +27,7 @@ export class RequestsService {
   async getAllRequests(filter?: string) {
     let options: any = {
       expand: 'speciality',
-      sort: '-status',
+      sort: '-created',
       '$autoCancel': false
     }
     if(filter){
@@ -57,11 +57,15 @@ export class RequestsService {
     }
   }
 
-  async getPaidRequests() {
+  async getPaidRequests(filtro?: string) {
+    let filter = 'user.id = "' + this.sessionService.getUser().id + '" && status > 0';
+    if(filtro){
+      filter = 'user.id = "' + this.sessionService.getUser().id + '" && status > 0 && '+ filtro;
+    }
     try {
       const response = await client.collection('requests').getFullList(200, {
         expand: 'user,speciality,detective',
-        filter: 'user.id = "' + this.sessionService.getUser().id + '" && status > 0'
+        filter: filter
       });
       return response;
     }
@@ -118,10 +122,15 @@ export class RequestsService {
     }
   }
 
-  async getRequest(id: any) {
+  async getRequest(id: any, filter?: any) {
+    let filtro = "";
+    if(filter){
+      filtro = filter;
+    }
     try {
       const response = await client.collection('requests').getOne(id, {
-        expand: 'user,speciality,detective'
+        expand: 'user,speciality,detective',
+        filter: filtro
       }) as any;
       if (response.detective) {
         response["expand"].detective = await client.collection('users').getOne(response.detective);
