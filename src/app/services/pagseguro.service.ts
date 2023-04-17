@@ -14,6 +14,18 @@ export class PagseguroService {
     // this.pay();
   }
 
+  getPublicId(){
+    const headers: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': environment.pagSeguroToken
+    });
+    return new Promise((resolve, reject) => {
+      this.http.post(`${environment.pagSeguroApi}/public-keys/`, {type: 'card'}, {headers}).pipe().subscribe(async (res: any) => {
+        resolve(res);
+      });
+    });
+  }
+
   // get the pagseguro session id
   getSessionId() {
     const headers = {
@@ -101,7 +113,7 @@ export class PagseguroService {
 
   pay(card: any, userData:any, productData: any) {
     var card = this.window.PagSeguro.encryptCard({
-      publicKey: environment.pagSeguroPublicKey,
+      publicKey: card.publicKey,
       holder: card.holder,
       number: card.number,
       expMonth: card.expMonth,
@@ -176,7 +188,7 @@ export class PagseguroService {
 
     const headers: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'FC80C5328AA34CF7AC80CB0F49A4A845'
+      'Authorization': environment.pagSeguroToken
     });
 
     return this.http.post('https://oracle.garrysmod.com.br/https://sandbox.api.pagseguro.com/orders', data, {headers}).toPromise();

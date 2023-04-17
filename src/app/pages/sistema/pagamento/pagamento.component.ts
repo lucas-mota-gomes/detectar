@@ -31,7 +31,8 @@ export class PagamentoComponent implements OnInit {
     name: [null, [Validators.required]],
     cvv: [null, [Validators.required]],
     cpf: [null, [Validators.required]],
-    expiration: [null, [Validators.required]]
+    expiration: [null, [Validators.required]],
+    publicKey: [null, [Validators.required]]
   });
 
   public confirmModal: boolean = false;
@@ -46,6 +47,9 @@ export class PagamentoComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.getRequest();
     this.setCardTest();
+    this.pagseguroService.getPublicId().then((response: any) => {
+      this.paymentForm.get('publicKey')?.setValue(response.public_key);
+    });
   }
 
   setCardTest() {
