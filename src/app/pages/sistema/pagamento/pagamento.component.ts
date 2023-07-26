@@ -6,6 +6,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 import { PagseguroService } from 'src/app/services/pagseguro.service';
 import { RequestsService } from 'src/app/services/requests.service';
 import { SessionService } from 'src/app/services/session.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-pagamento',
@@ -32,7 +33,7 @@ export class PagamentoComponent implements OnInit {
     cvv: [null, [Validators.required]],
     cpf: [null, [Validators.required]],
     expiration: [null, [Validators.required]],
-    publicKey: [null, [Validators.required]]
+    publicKey: [environment.pagSeguroPublicKey, [Validators.required]]
   });
 
   public confirmModal: boolean = false;
