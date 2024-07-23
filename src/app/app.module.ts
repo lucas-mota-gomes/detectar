@@ -29,7 +29,7 @@ import { UsuarioComponent } from './pages/sistema/usuario/usuario.component';
 import { ServiceInfoComponent } from './pages/sistema/service-info/service-info.component';
 import { RequestServiceComponent } from './pages/sistema/request-service/request-service.component';
 import { FileUploadModule } from 'primeng/fileupload';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { RequestsComponent } from './pages/sistema/requests/requests.component';
 import { StepsModule } from 'primeng/steps';
 import { PagamentoComponent } from './pages/sistema/pagamento/pagamento.component';
@@ -50,58 +50,52 @@ import { SecurePipe } from './pipes/secure.pipe';
 // progress spinner
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    LandingPageComponent,
-    AcessoComponent,
-    LoginComponent,
-    CadastroComponent,
-    SistemaComponent,
-    HomeComponent,
-    UsuarioComponent,
-    ServiceInfoComponent,
-    RequestServiceComponent,
-    RequestsComponent,
-    PagamentoComponent,
-    CarrinhoComponent,
-    ConfigComponent,
-    AdminHomeComponent,
-    DetectiveRequestsComponent,
-    DetectiveRequestDetailComponent,
-    SecurePipe
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    InputTextModule,
-    ButtonModule,
-    PasswordModule,
-    CheckboxModule,
-    DropdownModule,
-    MultiSelectModule,
-    BrowserAnimationsModule,
-    InputTextareaModule,
-    InputMaskModule,
-    ToastModule,
-    SidebarModule,
-    FileUploadModule,
-    HttpClientModule,
-    StepsModule,
-    DialogModule,
-    BadgeModule,
-    MenuModule,
-    TagModule,
-    CarouselModule,
-    ProgressSpinnerModule,
-    ToggleButtonModule
-  ],
-  providers: [
-    MessageService,
-    AuthInterceptor
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        LandingPageComponent,
+        AcessoComponent,
+        LoginComponent,
+        CadastroComponent,
+        SistemaComponent,
+        HomeComponent,
+        UsuarioComponent,
+        ServiceInfoComponent,
+        RequestServiceComponent,
+        RequestsComponent,
+        PagamentoComponent,
+        CarrinhoComponent,
+        ConfigComponent,
+        AdminHomeComponent,
+        DetectiveRequestsComponent,
+        DetectiveRequestDetailComponent,
+        SecurePipe
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        InputTextModule,
+        ButtonModule,
+        PasswordModule,
+        CheckboxModule,
+        DropdownModule,
+        MultiSelectModule,
+        BrowserAnimationsModule,
+        InputTextareaModule,
+        InputMaskModule,
+        ToastModule,
+        SidebarModule,
+        FileUploadModule,
+        StepsModule,
+        DialogModule,
+        BadgeModule,
+        MenuModule,
+        TagModule,
+        CarouselModule,
+        ProgressSpinnerModule,
+        ToggleButtonModule], providers: [
+        MessageService,
+        AuthInterceptor,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }
