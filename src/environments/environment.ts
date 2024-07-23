@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  pocketBaseUrl: 'https://oracle.garrysmod.com.br/http://65.21.248.242:2021',
+  pocketBaseUrl: 'http://127.0.0.1:8090',
   // pagSeguroApi: 'https://sandbox.api.pagseguro.com',
   pagSeguroApi: 'https://oracle.garrysmod.com.br/https://api.pagseguro.com',
   pagSeguroToken: 'B5139333B31D47D589DDECBC56DE5662',

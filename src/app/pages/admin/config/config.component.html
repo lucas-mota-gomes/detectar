@@ -9,7 +9,7 @@
           </div>
           <div>
             <img width="50px"
-              [src]="'https://oracle.garrysmod.com.br/http://65.21.248.242:2021/api/files/specialities/'+item.id+'/'+item.image | secure | async" />
+              [src]="'http://127.0.0.1:8090/api/files/specialities/'+item.id+'/'+item.image | secure | async" />
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@
   <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
     <div class="text-center mb-5">
       <img *ngIf="window.item"
-        [src]="'https://oracle.garrysmod.com.br/http://65.21.248.242:2021/api/files/specialities/'+window.item?.id+'/'+window.item?.image | secure | async"
+        [src]="'http://127.0.0.1:8090/api/files/specialities/'+window.item?.id+'/'+window.item?.image | secure | async"
         alt="Image" height="50" class="mb-3">
       <div class="text-900 text-3xl font-medium mb-3">{{window.item?.label}}</div>
     </div>
