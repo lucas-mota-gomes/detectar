@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { LoadingService } from 'src/app/services/loading.service';
 import { SpecialitiesService } from 'src/app/services/specialities.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +27,7 @@ export class HomeComponent implements OnInit {
     //   {label: 'Crimes Cibernéticos', value: 10, img: 'assets/img/cybercrime.png', type: 1},
     //   {label: 'Outros', value: 11, img: 'assets/img/other.png', type: 0},
   ];
+  public apiUrl = environment.pocketBaseUrl;
 
   ngOnInit(): void {
     this.loading.showLoading();

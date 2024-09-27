@@ -3,7 +3,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   appId: 'com.detectar.app',
   appName: 'Detectar',
-  webDir: 'dist/detectar-angular',
+  webDir: 'dist/detectar-angular/browser',
   android: {
     
   },

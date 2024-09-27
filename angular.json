@@ -50,7 +50,7 @@
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumError": "10kb"
                 }
               ],
               "fileReplacements": [
@@ -62,7 +62,11 @@
               "outputHashing": "all"
             },
             "development": {
-              "optimization": false,
+              "optimization": {
+                "styles": {
+                  "inlineCritical": false
+                }
+              },
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true

@@ -6,6 +6,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 import { RequestsService } from 'src/app/services/requests.service';
 import { SessionService } from 'src/app/services/session.service';
 import { Clipboard } from '@capacitor/clipboard';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-service-info',
@@ -33,6 +34,7 @@ export class ServiceInfoComponent implements OnInit {
   public visible: boolean = false;
   public retornoDiag: boolean = false;
   public step: number = 0;
+  public apiUrl = environment.pocketBaseUrl;
   public items: any[] = [
     { label: 'Início', status: 1 },
     { label: 'Detetive Selecionado', status: 2 },

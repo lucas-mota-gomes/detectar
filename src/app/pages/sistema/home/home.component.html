@@ -9,7 +9,7 @@
     <div class="container mt-5">
       <div class="row justify-content-between" style="gap: 1rem;">
         <div class="col-4 mb-4 app-item animate__animated animate__fadeIn" [routerLink]="['/sistema/request-service/', item.id]" *ngFor="let item of specialities">
-          <img [src]="'http://127.0.0.1:8090/api/files/specialities/'+item.id+'/'+item.image | secure | async" alt="img">
+          <img [src]="apiUrl+'/api/files/specialities/'+item.id+'/'+item.image | secure | async" alt="img">
           <span class="d-block">{{item.label}}</span>
         </div>
       </div>

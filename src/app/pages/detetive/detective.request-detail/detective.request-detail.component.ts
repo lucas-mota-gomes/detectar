@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { LoadingService } from 'src/app/services/loading.service';
 import { RequestsService } from 'src/app/services/requests.service';
 import { SessionService } from 'src/app/services/session.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-detective.request-detail',
@@ -34,6 +35,7 @@ export class DetectiveRequestDetailComponent implements OnInit {
   public formData = new FormData();
   public retornoDiag: boolean = false;
   public relato: any;
+  public apiUrl = environment.pocketBaseUrl;
   public items: any[] = [
     { label: 'Início', status: 1 },
     { label: 'Detetive Selecionado', status: 2 },

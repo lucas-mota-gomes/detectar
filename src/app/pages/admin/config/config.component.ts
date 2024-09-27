@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, QueryList, ViewChildren, ViewEncapsulati
 import { SpecialitiesService } from 'src/app/services/specialities.service';
 import { MenuItem, MessageService } from 'primeng/api';
 import { LoadingService } from 'src/app/services/loading.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-config',
@@ -21,11 +22,12 @@ export class ConfigComponent implements OnInit {
   public formData = new FormData();
   public itemLabel = ''
   public description = '';
+  public apiUrl = environment.pocketBaseUrl;
   public items: MenuItem[] = [{
     label: 'Menu',
     items: [
-      { label: 'Editar', icon: 'pi pi-fw pi-pencil', command: (event) => this.editItem(event.item.id), id: 'edit' },
-      { label: 'Excluir', icon: 'pi pi-fw pi-trash', command: (event) => this.delete(event.item.id) }
+      { label: 'Editar', icon: 'pi pi-fw pi-pencil', command: (event: any) => this.editItem(event.item.id), id: 'edit' },
+      { label: 'Excluir', icon: 'pi pi-fw pi-trash', command: (event: any) => this.delete(event.item.id) }
     ]
   }];
 

@@ -89,7 +89,7 @@
   <h3>Axenos</h3>
   <p-carousel [value]="dados?.anexos">
     <ng-template let-image pTemplate="item">
-      <img style="max-width: 270px;max-height: 400px;" [src]="'http://127.0.0.1:8090/api/files/requests/'+dados.id+'/'+image | secure | async" [alt]="'imagem'">
+      <img style="max-width: 270px;max-height: 400px;" [src]="apiUrl+'/api/files/requests/'+dados.id+'/'+image | secure | async" [alt]="'imagem'">
     </ng-template>
   </p-carousel>
   <p>Descrição da solicitação: </p>

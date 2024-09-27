@@ -21,8 +21,8 @@ export class HomeComponent implements OnInit {
   public items: MenuItem[] = [{
     label: 'Menu',
     items: [
-      { label: 'Editar', icon: 'pi pi-fw pi-pencil', id: 'edit', command: (event) => this.openEditDialog(event.item.id) },
-      { label: 'Excluir', icon: 'pi pi-fw pi-trash', id: 'delete', command: (event) => this.deleteRequest()}
+      { label: 'Editar', icon: 'pi pi-fw pi-pencil', id: 'edit', command: (event: any) => this.openEditDialog(event.item.id) },
+      { label: 'Excluir', icon: 'pi pi-fw pi-trash', id: 'delete', command: () => this.deleteRequest()}
     ]
   }];
   values: any[] = [];
