@@ -7,30 +7,54 @@
     <div class="form-group flex-column gap-1 align-items-center flex">
       <label for="email">NOME/RAZÃO SOCIAL</label>
       <input formControlName="name" type="text" class="input mb-3" placeholder="Nome/Razão Social" pInputText />
+      <!-- error -->
+      <div class="invalid-feedback d-block"
+        *ngIf="registerFormCliente.get('name')?.invalid && registerFormCliente.get('name')?.touched">
+        Campo Obrigatório</div>
     </div>
-    <div class="form-group flex-column gap-1 align-items-center flex">
+    <div class="form-group flex-column align-items-center gap-1 flex">
       <label for="email">CPF/CNPJ</label>
-      <input formControlName="cpf" type="text" class="input mb-3" placeholder="CPF/CNPJ" pInputText />
+      <input formControlName="cpf" type="text" (ngModelChange)="maskCpfCnpj(registerFormCliente.get('cpf'))" class="input mb-3" placeholder="CPF/CNPJ" pInputMask />
+      <!-- error -->
+      <div class="invalid-feedback d-block"
+        *ngIf="registerFormCliente.get('cpf')?.invalid && registerFormCliente.get('cpf')?.touched">
+        {{registerFormCliente.get('cpf')?.errors?.['invalid'] ? 'CPF/CNPJ inválido' : 'Campo Obrigatório'}}</div>
     </div>
     <div class="form-group flex-column gap-1 align-items-center flex">
       <label for="email">RG</label>
       <input formControlName="RG" type="text" class="input mb-3" placeholder="RG" pInputText />
+      <!-- error -->
+      <div class="invalid-feedback d-block"
+        *ngIf="registerFormCliente.get('RG')?.invalid && registerFormCliente.get('RG')?.touched">
+        Campo Obrigatório</div>
     </div>
     <!-- Endereço input -->
     <div class="form-group flex-column gap-1 align-items-center flex">
       <label for="email">ENDEREÇO</label>
       <input (click)="visible = true;" formControlName="address" type="text" class="input mb-3" placeholder="Endereço" pInputText />
+      <!-- error -->
+      <div class="invalid-feedback d-block"
+        *ngIf="registerFormCliente.get('address')?.invalid && registerFormCliente.get('address')?.touched">
+        Campo Obrigatório</div>
     </div>
     <!-- Celular input -->
     <div class="form-group flex-column gap-1 align-items-center flex mb-3">
       <label for="email">CELULAR</label>
       <p-inputMask formControlName="celular" mask="(99) 9 9999-9999" type="text" class=" mb-3" placeholder="Celular"
         pInputMask></p-inputMask>
+      <!-- error -->
+      <div class="invalid-feedback d-block"
+        *ngIf="registerFormCliente.get('celular')?.invalid && registerFormCliente.get('celular')?.touched">
+        Campo Obrigatório</div>
     </div>
     <!-- Email -->
     <div class="form-group flex-column gap-1 align-items-center flex">
       <label for="email">E-MAIL</label>
       <input formControlName="email" type="email" class="input mb-3" placeholder="E-mail" pInputText />
+      <!-- error -->
+      <div class="invalid-feedback d-block"
+        *ngIf="registerFormCliente.get('email')?.invalid && registerFormCliente.get('email')?.touched">
+        {{registerFormCliente.get('email')?.errors?.['pattern'] ? 'E-mail inválido' : 'Campo Obrigatório'}}</div>
     </div>
     <!-- Senha -->
     <div class="form-group flex-column gap-1 align-items-center flex">
@@ -50,34 +74,58 @@
 
   <ng-template #detetive>
     <form action="submit" [formGroup]="registerFormDetetive">
-      <div class="form-group flex-column align-items-center gap-1 flex">
+      <div class="form-group flex-column align-items-center gap-1 flex mb-3">
         <label for="email">NOME/RAZÃO SOCIAL</label>
-        <input formControlName="name" type="text" class="input mb-3" placeholder="Nome/Razão Social" pInputText />
+        <input formControlName="name" type="text" class="input" placeholder="Nome/Razão Social" pInputText />
+        <!-- error -->
+        <div class="invalid-feedback d-block"
+          *ngIf="registerFormDetetive.get('name')?.invalid && registerFormDetetive.get('name')?.touched">
+          Campo Obrigatório</div>
       </div>
       <div class="form-group flex-column align-items-center gap-1 flex">
         <label for="email">CPF/CNPJ</label>
-        <input formControlName="cpf" type="text" class="input mb-3" placeholder="CPF/CNPJ" pInputMask />
+        <input formControlName="cpf" type="text" (ngModelChange)="maskCpfCnpj(registerFormDetetive.get('cpf'))" class="input mb-3" placeholder="CPF/CNPJ" pInputMask />
+        <!-- error -->
+        <div class="invalid-feedback d-block"
+          *ngIf="registerFormDetetive.get('cpf')?.invalid && registerFormDetetive.get('cpf')?.touched">
+          {{registerFormDetetive.get('cpf')?.errors?.['invalid'] ? 'CPF/CNPJ inválido' : 'Campo Obrigatório'}}</div>
       </div>
       <div class="form-group flex-column align-items-center gap-1 flex">
         <label for="email">RG</label>
         <input formControlName="RG" type="text" class="input mb-3" placeholder="RG" pInputText />
+        <!-- error -->
+        <div class="invalid-feedback d-block"
+          *ngIf="registerFormDetetive.get('RG')?.invalid && registerFormDetetive.get('RG')?.touched">
+          Campo Obrigatório</div>
       </div>
       <!-- Endereço input -->
       <div class="form-group flex-column align-items-center gap-1 flex">
         <label for="email">ENDEREÇO</label>
         <input (click)="visible = true;" formControlName="address" type="text" class="input mb-3" placeholder="Endereço"
           pInputText />
+        <!-- error -->
+        <div class="invalid-feedback d-block"
+          *ngIf="registerFormDetetive.get('address')?.invalid && registerFormDetetive.get('address')?.touched">
+          Campo Obrigatório</div>
       </div>
       <!-- Celular input -->
       <div class="form-group flex-column align-items-center gap-1 flex mb-3">
         <label for="email">CELULAR</label>
         <p-inputMask formControlName="celular" mask="(99) 9 9999-9999" type="text" class=" mb-3" placeholder="Celular"
           pInputMask></p-inputMask>
+        <!-- error -->
+        <div class="invalid-feedback d-block"
+          *ngIf="registerFormDetetive.get('celular')?.invalid && registerFormDetetive.get('celular')?.touched">
+          Campo Obrigatório</div>
       </div>
       <!-- Email -->
       <div class="form-group flex-column align-items-center gap-1 flex">
         <label for="email">E-MAIL</label>
         <input formControlName="email" type="email" class="input mb-3" placeholder="E-mail" pInputText />
+        <!-- error -->
+        <div class="invalid-feedback d-block"
+          *ngIf="registerFormDetetive.get('email')?.invalid && registerFormDetetive.get('email')?.touched">
+          {{registerFormDetetive.get('email')?.errors?.['pattern'] ? 'E-mail inválido' : 'Campo Obrigatório'}}</div>
       </div>
       <!-- Senha -->
       <div class="form-group flex-column align-items-center gap-1 flex">
@@ -97,6 +145,10 @@
           [placeholder]="'Especialidade'" [filter]="true" [filterBy]="'label'" [showToggleAll]="true"
           [maxSelectedLabels]="1" [appendTo]="'body'">
         </p-multiSelect>
+        <!-- error -->
+        <div class="invalid-feedback d-block"
+          *ngIf="registerFormDetetive.get('speciality')?.invalid && registerFormDetetive.get('speciality')?.touched">
+          Campo Obrigatório</div>
       </div>
       <!-- apresentação do detetive textarea -->
       <div class="form-group flex-column align-items-center gap-1 flex mt-5 pt-2">
@@ -113,9 +165,11 @@
 </section>
 
 <p-dialog header="Endereço" [(visible)]="visible">
+  <label for="">CEP</label>
   <p-inputMask [style]="{'width': '100%'}" (ngModelChange)="this.getCep()" mask="99999999" [(ngModel)]="cep" type="text"
     class="mb-3" placeholder="CEP" pInputMask></p-inputMask>
 
+  <label for="">Número</label>
   <input [style]="{'width': '100%', 'margin-top': '1rem'}" [(ngModel)]="number" type="text" class="input mb-3" placeholder="Número"
     pInputText />
 
