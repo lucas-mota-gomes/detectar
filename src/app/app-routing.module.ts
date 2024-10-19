@@ -27,24 +27,27 @@ const routes: Routes = [
       { path: 'cadastro/:userType', component: CadastroComponent }
     ]
   },
-  { path: 'sistema', component: SistemaComponent, children: [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent },
-    { path: 'usuario', component: UsuarioComponent },
-    { path: 'service-info/:id', component: ServiceInfoComponent },
-    { path: 'request-service/:id', component: RequestServiceComponent },
-    { path: 'requests', component: RequestsComponent },
-    { path: 'pagamento/:id', component: PagamentoComponent },
-    { path: 'carrinho', component: CarrinhoComponent},
-    // admin home
-    { path: 'admin/home', component: AdminHomeComponent },
-    { path: 'admin/config', component: ConfigComponent},
-    { path: 'admin/manage-detetives', component: ManageDetetivesComponent},
-    // Detetive
-    { path: 'detetive/', redirectTo: 'detetive/requests', pathMatch: 'full' },
-    { path: 'detetive/requests', component: DetectiveRequestsComponent },
-    { path: 'detetive/requests/:id', component: DetectiveRequestDetailComponent}
-  ] },
+  {
+    path: 'sistema', component: SistemaComponent, children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
+      { path: 'usuario', component: UsuarioComponent },
+      { path: 'service-info/:id', component: ServiceInfoComponent },
+      { path: 'request-service/:id', component: RequestServiceComponent },
+      { path: 'request-service/:id/:requestId', component: RequestServiceComponent },
+      { path: 'requests', component: RequestsComponent },
+      { path: 'pagamento/:id', component: PagamentoComponent },
+      { path: 'carrinho', component: CarrinhoComponent },
+      // admin home
+      { path: 'admin/home', component: AdminHomeComponent },
+      { path: 'admin/config', component: ConfigComponent },
+      { path: 'admin/manage-detetives', component: ManageDetetivesComponent },
+      // Detetive
+      { path: 'detetive/', redirectTo: 'detetive/requests', pathMatch: 'full' },
+      { path: 'detetive/requests', component: DetectiveRequestsComponent },
+      { path: 'detetive/requests/:id', component: DetectiveRequestDetailComponent },
+    ]
+  },
   { path: '', redirectTo: 'acesso', pathMatch: 'full' },
   { path: '**', redirectTo: 'acesso' },
 ];

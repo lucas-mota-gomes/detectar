@@ -144,6 +144,20 @@ export class RequestsService {
     }
   }
 
+  async editRequest(request: any, id: any) {
+    console.log("🚀 ~ RequestsService ~ editRequest ~ request:", request)
+    try {
+      await client.collection('requests').update(id, {
+        'anexos': null
+      });
+      const response = await client.collection('requests').update(id, request);
+      return response;
+    }
+    catch (error) {
+      throw error;
+    }
+  }
+
   async getSpecialty(id: any) {
     try {
       const response = await client.collection('specialities').getOne(id) as any;
