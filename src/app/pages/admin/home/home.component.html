@@ -1,6 +1,6 @@
 <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
   <h1>{{!val ? 'Exibindo casos sem detetive' : 'Exibindo todos os casos'}}</h1>
-  <p-toggleButton (ngModelChange)="ngOnInit()" [onLabel]="'Visualizar casos sem detetive'" [offLabel]="'Visualizar todos'" [(ngModel)]="val"></p-toggleButton>
+  <p-toggleButton (onChange)="ngOnInit()" [onLabel]="'Visualizar casos sem detetive'" [offLabel]="'Visualizar todos'" [(ngModel)]="val"></p-toggleButton>
     <div class="grid">
         <div class="col-12 lg:col-4 p-3 position-relative" *ngFor="let item of requestList; let i = index">
 
@@ -27,7 +27,6 @@
 
     <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
         <div class="text-center mb-5">
-            <img src="https://via.placeholder.com/50" alt="Image" height="50" class="mb-3">
             <div class="text-900 text-3xl font-medium mb-3">{{window.item?.nome}}</div>
             <!-- relato with label -->
             <div class="text-start">

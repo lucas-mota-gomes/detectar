@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     ).catch((err) => {
       this.loading.hideLoading();
       console.log("🚀 ~ file: login.component.ts:41 ~ LoginComponent ~ login ~ err", err)
-      this.messageService.add({severity:'error', summary:'Erro ao efetuar login!'});
+      this.messageService.add({severity:'error', summary:'Erro ao efetuar login! ' + err.message});
     }
     );
   }

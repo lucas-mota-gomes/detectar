@@ -1,0 +1,27 @@
+<div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
+    <h1>Detetives</h1>
+      <div class="grid">
+          <div class="col-12 lg:col-4 p-3 position-relative" *ngFor="let item of values; let i = index">
+  
+              <div class="shadow-2 surface-card p-3" style="border-radius: 12px">
+                  <div class="flex align-items-center text-start justify-content-between">
+                      <div>
+                          <span class="text-3xl text-900 font-bold">{{item.name}}</span>
+                          <p class="mt-1 mb-0 text-600 text-xl">
+                            @for (speciality of item.expand.speciality; track $index) {
+                                {{speciality.label}}, 
+                            }
+                          </p>
+                          <p-tag [severity]="!item.active ? 'danger' : 'success'"
+                              [value]="item.active ? 'Ativo' : 'Inativo'"></p-tag>
+                      </div>
+                  </div>
+              </div>
+              <div class="position-absolute" style="top: 10px; right: 10px;">
+                  <button type="button" style="background-color: transparent; border: none; color: black;" pButton
+                      icon="pi pi-ellipsis-v" (click)="updateMenuItem(item); toggleMenu(i, $event, item.id, !item.active); window.item = item"></button>
+                  <p-menu #menu [popup]="true" [model]="items"></p-menu>
+              </div>
+          </div>
+      </div>
+  </div>

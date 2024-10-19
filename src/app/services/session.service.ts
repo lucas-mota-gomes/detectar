@@ -15,11 +15,25 @@ export class SessionService {
 
   user$ = this.user.asObservable();
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient,) { }
 
   public async login(email: string, password: string) {
     try {
       const response = await client.collection('users').authWithPassword(email, password);
+      if(response.record['type'] == 'detetive' && !response.record['active']){
+        localStorage.clear();
+        throw new Error('Usuário desativado');
+      }
+      return response;
+    }
+    catch (error) {
+      throw error;
+    }
+  }
+
+  public async disableUser(userId: string, status:boolean) {
+    try {
+      const response = await client.collection('users').update(userId, { active: status });
       return response;
     }
     catch (error) {

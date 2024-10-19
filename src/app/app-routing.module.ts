@@ -16,6 +16,7 @@ import { HomeComponent as AdminHomeComponent } from './pages/admin/home/home.com
 import { ConfigComponent } from './pages/admin/config/config.component';
 import { DetectiveRequestsComponent } from './pages/detetive/detective.requests/detective.requests.component';
 import { DetectiveRequestDetailComponent } from './pages/detetive/detective.request-detail/detective.request-detail.component';
+import { ManageDetetivesComponent } from './pages/admin/manage-detetives/manage-detetives.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,7 @@ const routes: Routes = [
     // admin home
     { path: 'admin/home', component: AdminHomeComponent },
     { path: 'admin/config', component: ConfigComponent},
+    { path: 'admin/manage-detetives', component: ManageDetetivesComponent},
     // Detetive
     { path: 'detetive/', redirectTo: 'detetive/requests', pathMatch: 'full' },
     { path: 'detetive/requests', component: DetectiveRequestsComponent },

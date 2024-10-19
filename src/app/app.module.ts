@@ -49,6 +49,7 @@ import { AuthInterceptor } from './shared/AuthInterceptor';
 import { SecurePipe } from './pipes/secure.pipe';
 // progress spinner
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ManageDetetivesComponent } from './pages/admin/manage-detetives/manage-detetives.component';
 
 @NgModule({ declarations: [
         AppComponent,
@@ -68,7 +69,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
         AdminHomeComponent,
         DetectiveRequestsComponent,
         DetectiveRequestDetailComponent,
-        SecurePipe
+        SecurePipe,
+        ManageDetetivesComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,

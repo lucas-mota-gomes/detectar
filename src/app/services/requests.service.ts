@@ -25,14 +25,15 @@ export class RequestsService {
   }
 
   async getAllRequests(filter?: string) {
+    console.log("🚀 ~ RequestsService ~ getAllRequests ~ filter:", filter)
     let options: any = {
-      expand: 'speciality',
+      expand: 'speciality,user,detective',
       sort: '-created',
       '$autoCancel': false
     }
     if(filter){
       options = {
-        expand: 'speciality',
+        expand: 'speciality,user,detective',
         sort: '-status',
         filter: filter,
         '$autoCancel': false
@@ -41,15 +42,16 @@ export class RequestsService {
     try {
       const response = await client.collection('requests').getFullList(200, options);
       let dados = response;
-      for (const iterator of dados as any) {
-        const userId = iterator.user as string;
-        const user = await client.collection('users').getOne(userId);
-        iterator['expand']['user'] = user;
-        if (iterator.detective.length > 0) {
-          const detective = await client.collection('users').getOne(iterator.detective);
-          iterator['expand']['detective'] = detective;
-        }
-      }
+      console.log("🚀 ~ RequestsService ~ getAllRequests ~ dados:", dados)
+      // for (const iterator of dados as any) {
+      //   const userId = iterator.user as string;
+      //   const user = await client.collection('users').getOne(userId);
+      //   iterator['expand']['user'] = user;
+      //   if (iterator.detective.length > 0) {
+      //     const detective = await client.collection('users').getOne(iterator.detective);
+      //     iterator['expand']['detective'] = detective;
+      //   }
+      // }
       return response;
     }
     catch (error) {
@@ -166,6 +168,20 @@ export class RequestsService {
     try {
       const response = await client.collection('users').getFullList(200, {
         filter: 'type = "detetive" && speciality ~ "' + speciality + '"'
+      });
+      return response;
+    }
+    catch (error) {
+      throw error;
+    }
+  }
+
+  async getAllDetectives() {
+    try {
+      const response = await client.collection('users').getFullList(200, {
+        filter: 'type = "detetive"',
+        expand: 'speciality',
+        sort: '+name'
       });
       return response;
     }
